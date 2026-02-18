@@ -48,7 +48,7 @@ const Hero = () => {
               color: 'rgba(255, 255, 255, 0.85)',
               maxWidth: '600px'
             }}>
-              Desarrollamos aplicaciones web y móviles, automatizamos procesos empresariales y analizamos datos para impulsar el crecimiento de tu empresa.
+              Somos tu aliado tecnológico para desarrollar soluciones personalizadas que automatizan procesos, optimizan operaciones y convierten datos en decisiones estratégicas.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -56,7 +56,7 @@ const Hero = () => {
                 onClick={scrollToContact}
                 className="btn-primary"
               >
-                Comienza tu proyecto
+                Solicita una consulta gratuita
                 <ArrowRight size={20} />
               </button>
 
@@ -64,23 +64,23 @@ const Hero = () => {
                 onClick={() => document.querySelector('#servicios').scrollIntoView({ behavior: 'smooth' })}
                 className="btn-secondary"
               >
-                Ver servicios
+                Conoce nuestras soluciones
               </button>
             </div>
 
-            {/* Stats */}
+            {/* Value Props */}
             <div className="grid grid-cols-3 gap-8 pt-8 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.25)' }}>
               <div>
-                <div style={{ fontSize: '32px', fontWeight: '600', color: '#00FFD1' }}>50+</div>
-                <div style={{ fontSize: '16px', color: '#4D4D4D', marginTop: '4px' }}>Proyectos</div>
+                <div style={{ fontSize: '32px', fontWeight: '600', color: '#00FFD1' }}>100%</div>
+                <div style={{ fontSize: '16px', color: '#4D4D4D', marginTop: '4px' }}>Personalizado</div>
               </div>
               <div>
-                <div style={{ fontSize: '32px', fontWeight: '600', color: '#00FFD1' }}>98%</div>
-                <div style={{ fontSize: '16px', color: '#4D4D4D', marginTop: '4px' }}>Satisfacción</div>
+                <div style={{ fontSize: '32px', fontWeight: '600', color: '#00FFD1' }}>24/7</div>
+                <div style={{ fontSize: '16px', color: '#4D4D4D', marginTop: '4px' }}>Soporte</div>
               </div>
               <div>
-                <div style={{ fontSize: '32px', fontWeight: '600', color: '#00FFD1' }}>5+</div>
-                <div style={{ fontSize: '16px', color: '#4D4D4D', marginTop: '4px' }}>Años</div>
+                <div style={{ fontSize: '32px', fontWeight: '600', color: '#00FFD1' }}>∞</div>
+                <div style={{ fontSize: '16px', color: '#4D4D4D', marginTop: '4px' }}>Posibilidades</div>
               </div>
             </div>
           </div>

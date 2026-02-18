@@ -42,38 +42,38 @@ export const services = [
 export const portfolioProjects = [
   {
     id: 1,
-    title: "Sistema de Gestión Empresarial",
-    description: "Plataforma integral para la gestión de operaciones, inventario y ventas",
+    title: "Sistemas de Gestión Empresarial",
+    description: "Desarrollamos plataformas integrales para gestionar operaciones, inventario, ventas y más",
     category: "Web Development",
     image: "https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwzfHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50fGVufDB8fHx8MTc3MTQwODkxOXww&ixlib=rb-4.1.0&q=85",
-    metrics: {
-      efficiency: "+45%",
-      time: "3 meses",
-      roi: "180%"
+    benefits: {
+      benefit1: "Automatización",
+      benefit2: "Escalable",
+      benefit3: "Seguro"
     }
   },
   {
     id: 2,
-    title: "Dashboard Analítico de Ventas",
-    description: "Visualización en tiempo real de KPIs y métricas de rendimiento comercial",
+    title: "Dashboards Analíticos",
+    description: "Visualizaciones en tiempo real de KPIs y métricas para tomar decisiones basadas en datos",
     category: "Data Analytics",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHw0fHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50fGVufDB8fHx8MTc3MTQwODkxOXww&ixlib=rb-4.1.0&q=85",
-    metrics: {
-      efficiency: "+60%",
-      time: "2 meses",
-      roi: "220%"
+    benefits: {
+      benefit1: "Tiempo Real",
+      benefit2: "Predictivo",
+      benefit3: "Intuitivo"
     }
   },
   {
     id: 3,
-    title: "App Móvil de Logística",
-    description: "Aplicación para tracking de entregas y optimización de rutas",
+    title: "Apps Móviles Empresariales",
+    description: "Aplicaciones móviles nativas o multiplataforma para conectar con tus clientes y empleados",
     category: "Mobile Development",
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50fGVufDB8fHx8MTc3MTQwODkxOXww&ixlib=rb-4.1.0&q=85",
-    metrics: {
-      efficiency: "+35%",
-      time: "4 meses",
-      roi: "150%"
+    benefits: {
+      benefit1: "Responsive",
+      benefit2: "Offline-First",
+      benefit3: "Cross-Platform"
     }
   }
 ];
@@ -122,8 +122,8 @@ export const generateTimeSeriesData = (points = 12) => {
 };
 
 export const companyStats = [
-  { label: "Proyectos Completados", value: "50+", icon: "CheckCircle" },
-  { label: "Clientes Satisfechos", value: "30+", icon: "Users" },
-  { label: "Años de Experiencia", value: "5+", icon: "Award" },
-  { label: "Tasa de Éxito", value: "98%", icon: "TrendingUp" }
+  { label: "Tecnologías Modernas", value: "20+", icon: "CheckCircle" },
+  { label: "Consulta Gratuita", value: "100%", icon: "Users" },
+  { label: "Soporte Continuo", value: "24/7", icon: "Award" },
+  { label: "Soluciones Personalizadas", value: "100%", icon: "TrendingUp" }
 ];

@@ -19,7 +19,7 @@ const Portfolio = () => {
             color: '#FFFFFF',
             marginBottom: '16px'
           }}>
-            Portafolio de Proyectos
+            Soluciones Tecnológicas
           </h2>
           <p style={{ 
             fontSize: '20px', 
@@ -29,7 +29,7 @@ const Portfolio = () => {
             maxWidth: '700px',
             margin: '0 auto'
           }}>
-            Casos de éxito que demuestran nuestro compromiso con la excelencia
+            Ejemplos de cómo nuestras soluciones pueden transformar tu negocio
           </p>
         </div>
 
@@ -45,10 +45,17 @@ const Portfolio = () => {
               fontSize: '24px', 
               fontWeight: '600', 
               color: '#FFFFFF',
+              marginBottom: '12px'
+            }}>
+              Ejemplo: Visualización de Datos en Tiempo Real
+            </h3>
+            <p style={{
+              fontSize: '16px',
+              color: 'rgba(255, 255, 255, 0.85)',
               marginBottom: '24px'
             }}>
-              Crecimiento de Eficiencia - Proyectos Implementados
-            </h3>
+              Así se vería un dashboard de análisis de rendimiento con métricas reales vs objetivos
+            </p>
             <TimeSeriesChart data={timeSeriesData} />
           </div>
         </div>
@@ -126,20 +133,38 @@ const Portfolio = () => {
                   {project.description}
                 </p>
 
-                {/* Metrics */}
-                <div className="grid grid-cols-3 gap-4 pt-4 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.25)' }}>
-                  <div>
-                    <div style={{ fontSize: '12px', color: '#4D4D4D', marginBottom: '4px' }}>Eficiencia</div>
-                    <div style={{ fontSize: '18px', fontWeight: '600', color: '#00FFD1' }}>{project.metrics.efficiency}</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '12px', color: '#4D4D4D', marginBottom: '4px' }}>Tiempo</div>
-                    <div style={{ fontSize: '18px', fontWeight: '600', color: '#00FFD1' }}>{project.metrics.time}</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: '12px', color: '#4D4D4D', marginBottom: '4px' }}>ROI</div>
-                    <div style={{ fontSize: '18px', fontWeight: '600', color: '#00FFD1' }}>{project.metrics.roi}</div>
-                  </div>
+                {/* Benefits */}
+                <div className="flex flex-wrap gap-2 pt-4 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.25)' }}>
+                  <span style={{
+                    padding: '6px 12px',
+                    background: 'rgba(0, 255, 209, 0.1)',
+                    border: '1px solid rgba(0, 255, 209, 0.3)',
+                    fontSize: '14px',
+                    color: '#00FFD1',
+                    fontWeight: '500'
+                  }}>
+                    {project.benefits.benefit1}
+                  </span>
+                  <span style={{
+                    padding: '6px 12px',
+                    background: 'rgba(0, 255, 209, 0.1)',
+                    border: '1px solid rgba(0, 255, 209, 0.3)',
+                    fontSize: '14px',
+                    color: '#00FFD1',
+                    fontWeight: '500'
+                  }}>
+                    {project.benefits.benefit2}
+                  </span>
+                  <span style={{
+                    padding: '6px 12px',
+                    background: 'rgba(0, 255, 209, 0.1)',
+                    border: '1px solid rgba(0, 255, 209, 0.3)',
+                    fontSize: '14px',
+                    color: '#00FFD1',
+                    fontWeight: '500'
+                  }}>
+                    {project.benefits.benefit3}
+                  </span>
                 </div>
               </div>
             </div>

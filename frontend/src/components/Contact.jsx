@@ -56,7 +56,7 @@ const Contact = () => {
             color: '#FFFFFF',
             marginBottom: '16px'
           }}>
-            ¿Listo para transformar tu empresa?
+            Comencemos a construir tu solución
           </h2>
           <p style={{ 
             fontSize: '20px', 
@@ -66,7 +66,7 @@ const Contact = () => {
             maxWidth: '700px',
             margin: '0 auto'
           }}>
-            Contáctanos y descubre cómo podemos impulsar tu negocio con tecnología innovadora
+            Agenda una consulta gratuita y cuéntanos sobre tu proyecto. Juntos encontraremos la mejor solución tecnológica para tu negocio.
           </p>
         </div>
 
