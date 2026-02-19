@@ -14,7 +14,7 @@ const SaasHero = () => {
     <section 
       id="hero" 
       className="min-h-screen flex items-center justify-center relative overflow-hidden" 
-      style={{ background: COLORS.black, paddingTop: '76px' }}
+      style={{ background: COLORS.black, paddingTop: '220px' }}
     >
       {/* Animated Grid Background */}
       <div 

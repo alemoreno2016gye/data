@@ -1,23 +1,23 @@
 /* Footer Logo Responsive Styles */
 .footer-logo {
-  height: 60px;
+  height: 240px;
   width: auto;
-  margin-bottom: 20px;
-  filter: brightness(1.25) contrast(1.05);
+  margin-bottom: 32px;
+  filter: brightness(1.4) contrast(1.15);
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
 
 @media (max-width: 767px) {
   .footer-logo {
-    height: 48px;
-    margin-bottom: 16px;
+    height: 192px;
+    margin-bottom: 24px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .footer-logo {
-    height: 54px;
-    margin-bottom: 18px;
+    height: 216px;
+    margin-bottom: 28px;
   }
 }
