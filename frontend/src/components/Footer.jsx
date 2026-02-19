@@ -12,7 +12,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-2">
             <img 
-              src="https://customer-assets.emergentagent.com/job_data-wizards-3/artifacts/kwz4zwcj_ChatGPT%20Image%2018%20feb%202026%2C%2017_26_31.png" 
+              src="https://customer-assets.emergentagent.com/job_data-wizards-3/artifacts/1da1ir9i_ALTAMA.png" 
               alt="ALTAMA" 
               className="footer-logo"
             />
