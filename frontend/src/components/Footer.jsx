@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, Phone, Linkedin, Twitter, Github } from 'lucide-react';
+import './FooterLogo.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,18 +10,11 @@ const Footer = () => {
       <div className="max-w-[1400px] mx-auto px-[7.6923%]">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}
-          {/* Company Info */}
           <div className="md:col-span-2">
             <img 
               src="https://customer-assets.emergentagent.com/job_data-wizards-3/artifacts/kwz4zwcj_ChatGPT%20Image%2018%20feb%202026%2C%2017_26_31.png" 
               alt="ALTAMA" 
-              style={{ 
-                height: '60px',
-                width: 'auto',
-                marginBottom: '20px',
-                filter: 'brightness(1.25) contrast(1.05)',
-                imageRendering: '-webkit-optimize-contrast'
-              }}
+              className="footer-logo"
             />
             <p style={{ 
               fontSize: '16px', 
