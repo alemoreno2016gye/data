@@ -1,5 +1,6 @@
 import React from 'react';
-import { ArrowRight, Sparkles, Play } from 'lucide-react';
+import { ArrowRight, Target } from 'lucide-react';
+import { COLORS } from '../constants/colors';
 
 const SaasHero = () => {
   const scrollToContact = () => {
@@ -13,13 +14,13 @@ const SaasHero = () => {
     <section 
       id="hero" 
       className="min-h-screen flex items-center justify-center relative overflow-hidden" 
-      style={{ background: '#000000', paddingTop: '80px' }}
+      style={{ background: COLORS.black, paddingTop: '80px' }}
     >
       {/* Animated Grid Background */}
       <div 
         className="absolute inset-0 opacity-[0.08]"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 255, 209, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 209, 0.3) 1px, transparent 1px)',
+          backgroundImage: `linear-gradient(${COLORS.goldBorder} 1px, transparent 1px), linear-gradient(90deg, ${COLORS.goldBorder} 1px, transparent 1px)`,
           backgroundSize: '80px 80px',
           animation: 'gridMove 20s linear infinite'
         }}
@@ -27,12 +28,12 @@ const SaasHero = () => {
 
       {/* Gradient Orbs */}
       <div 
-        className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-[100px]"
-        style={{ background: 'radial-gradient(circle, #00FFD1 0%, transparent 70%)' }}
+        className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full opacity-15 blur-[100px]"
+        style={{ background: `radial-gradient(circle, ${COLORS.gold} 0%, transparent 70%)` }}
       />
       <div 
-        className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full opacity-15 blur-[100px]"
-        style={{ background: 'radial-gradient(circle, #00FFD1 0%, transparent 70%)' }}
+        className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full opacity-12 blur-[100px]"
+        style={{ background: `radial-gradient(circle, ${COLORS.silver} 0%, transparent 70%)` }}
       />
 
       <div className="max-w-[1400px] mx-auto px-[7.6923%] py-20 relative z-10">
@@ -41,50 +42,50 @@ const SaasHero = () => {
           <div 
             className="inline-flex items-center gap-2 px-4 py-2 mb-8 backdrop-blur-md"
             style={{ 
-              background: 'rgba(0, 255, 209, 0.05)',
-              border: '1px solid rgba(0, 255, 209, 0.2)',
+              background: COLORS.goldBg,
+              border: `1px solid ${COLORS.goldBorder}`,
               borderRadius: '100px'
             }}
           >
-            <Sparkles size={16} style={{ color: '#00FFD1' }} />
-            <span style={{ color: '#00FFD1', fontSize: '14px', fontWeight: '500' }}>
-              Inteligencia Operativa Impulsada por IA
+            <Target size={16} style={{ color: COLORS.gold }} />
+            <span style={{ color: COLORS.gold, fontSize: '14px', fontWeight: '500' }}>
+              Inteligencia Operativa para Latinoamérica
             </span>
           </div>
 
-          {/* Main Headline */}
+          {/* Main Headline - Based on Mission */}
           <h1 style={{ 
             fontSize: '72px', 
             fontWeight: '700', 
             lineHeight: '1.1', 
             letterSpacing: '-2px', 
-            color: '#FFFFFF',
+            color: COLORS.white,
             marginBottom: '32px',
             textAlign: 'center'
           }}>
-            Transformamos decisiones en{' '}
+            Optimiza procesos, reduce riesgos,{' '}
             <span 
               style={{ 
-                background: 'linear-gradient(135deg, #00FFD1 0%, #00A896 100%)',
+                background: COLORS.goldGradient,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text'
               }}
             >
-              inteligencia operativa
+              maximiza rentabilidad
             </span>
           </h1>
 
-          {/* Subheadline */}
+          {/* Subheadline - Based on Mission */}
           <p style={{ 
             fontSize: '22px', 
             fontWeight: '400', 
             lineHeight: '1.6', 
-            color: 'rgba(255, 255, 255, 0.7)',
+            color: COLORS.whiteFaded,
             maxWidth: '750px',
             margin: '0 auto 48px'
           }}>
-            Plataforma de IA que automatiza procesos, optimiza operaciones y reduce riesgos mediante análisis econométrico avanzado y machine learning
+            Soluciones tecnológicas basadas en inteligencia artificial, análisis de datos y automatización para transformar decisiones en resultados medibles
           </p>
 
           {/* CTA Buttons */}
@@ -92,8 +93,8 @@ const SaasHero = () => {
             <button 
               onClick={scrollToContact}
               style={{
-                background: '#00FFD1',
-                color: '#000000',
+                background: COLORS.goldGradient,
+                color: COLORS.black,
                 border: 'none',
                 borderRadius: '8px',
                 padding: '16px 32px',
@@ -107,14 +108,14 @@ const SaasHero = () => {
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 255, 209, 0.4)';
+                e.currentTarget.style.boxShadow = `0 8px 24px rgba(212, 175, 55, 0.4)`;
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              Solicitar demo
+              Comienza ahora
               <ArrowRight size={18} />
             </button>
 
@@ -122,7 +123,7 @@ const SaasHero = () => {
               onClick={() => document.querySelector('#soluciones').scrollIntoView({ behavior: 'smooth' })}
               style={{
                 background: 'rgba(255, 255, 255, 0.05)',
-                color: '#FFFFFF',
+                color: COLORS.white,
                 border: '1px solid rgba(255, 255, 255, 0.1)',
                 borderRadius: '8px',
                 padding: '16px 32px',
@@ -137,14 +138,14 @@ const SaasHero = () => {
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                e.currentTarget.style.borderColor = 'rgba(0, 255, 209, 0.5)';
+                e.currentTarget.style.borderColor = COLORS.goldBorder;
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
                 e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
               }}
             >
-              Explorar soluciones
+              Ver soluciones
             </button>
           </div>
 
@@ -154,8 +155,8 @@ const SaasHero = () => {
             style={{
               maxWidth: '1000px',
               height: '500px',
-              background: 'rgba(0, 255, 209, 0.03)',
-              border: '1px solid rgba(0, 255, 209, 0.2)',
+              background: COLORS.goldBg,
+              border: `1px solid ${COLORS.goldBorder}`,
               borderRadius: '12px',
               backdropFilter: 'blur(20px)',
               padding: '24px',
@@ -167,7 +168,7 @@ const SaasHero = () => {
             <div 
               className="absolute inset-0 opacity-[0.15]"
               style={{
-                backgroundImage: 'linear-gradient(rgba(0, 255, 209, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 209, 0.4) 1px, transparent 1px)',
+                backgroundImage: `linear-gradient(${COLORS.goldBorder} 1px, transparent 1px), linear-gradient(90deg, ${COLORS.goldBorder} 1px, transparent 1px)`,
                 backgroundSize: '40px 40px'
               }}
             />
@@ -179,8 +180,8 @@ const SaasHero = () => {
                   style={{
                     width: '80px',
                     height: '80px',
-                    background: 'rgba(0, 255, 209, 0.1)',
-                    border: '2px solid rgba(0, 255, 209, 0.3)',
+                    background: COLORS.goldBg,
+                    border: `2px solid ${COLORS.goldBorder}`,
                     borderRadius: '50%',
                     display: 'flex',
                     alignItems: 'center',
@@ -188,10 +189,10 @@ const SaasHero = () => {
                     margin: '0 auto 16px'
                   }}
                 >
-                  <Play size={32} style={{ color: '#00FFD1' }} />
+                  <Target size={32} style={{ color: COLORS.gold }} />
                 </div>
-                <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px' }}>
-                  Dashboard en tiempo real
+                <p style={{ color: COLORS.whiteFaded, fontSize: '14px' }}>
+                  Decisiones basadas en datos
                 </p>
               </div>
             </div>
@@ -200,27 +201,27 @@ const SaasHero = () => {
             <div 
               className="absolute top-8 left-8 px-4 py-2"
               style={{
-                background: 'rgba(0, 255, 209, 0.1)',
-                border: '1px solid rgba(0, 255, 209, 0.3)',
+                background: COLORS.goldBg,
+                border: `1px solid ${COLORS.goldBorder}`,
                 borderRadius: '6px',
                 backdropFilter: 'blur(10px)'
               }}
             >
-              <div style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.5)' }}>Eficiencia</div>
-              <div style={{ fontSize: '20px', fontWeight: '700', color: '#00FFD1' }}>94.2%</div>
+              <div style={{ fontSize: '12px', color: COLORS.whiteSubtle }}>Eficiencia</div>
+              <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.gold }}>+42%</div>
             </div>
 
             <div 
               className="absolute top-8 right-8 px-4 py-2"
               style={{
-                background: 'rgba(0, 255, 209, 0.1)',
-                border: '1px solid rgba(0, 255, 209, 0.3)',
+                background: COLORS.silverBg,
+                border: `1px solid ${COLORS.silverBorder}`,
                 borderRadius: '6px',
                 backdropFilter: 'blur(10px)'
               }}
             >
-              <div style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.5)' }}>Risk Score</div>
-              <div style={{ fontSize: '20px', fontWeight: '700', color: '#00FFD1' }}>23</div>
+              <div style={{ fontSize: '12px', color: COLORS.whiteSubtle }}>Riesgo</div>
+              <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.silver }}>-35%</div>
             </div>
           </div>
         </div>
