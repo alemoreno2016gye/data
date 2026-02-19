@@ -9,11 +9,11 @@ const Footer = () => {
       <div className="max-w-[1400px] mx-auto px-[7.6923%]">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}
-          <div className="md:col-span-2">
+          <div>
             <img 
               src="https://customer-assets.emergentagent.com/job_data-wizards-3/artifacts/kwz4zwcj_ChatGPT%20Image%2018%20feb%202026%2C%2017_26_31.png" 
               alt="ALTAMA" 
-              style={{ height: '40px', marginBottom: '16px' }}
+              style={{ height: '70px', marginBottom: '16px' }}
             />
             <p style={{ 
               fontSize: '16px', 
