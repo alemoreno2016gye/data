@@ -11,8 +11,8 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-2">
             <img 
-              src="https://customer-assets.emergentagent.com/job_f48e3a24-1531-44b1-ab33-e0efd1b3fda9/artifacts/y7u8wioc_altama.png" 
-              alt="ALTAMA CONSULTING" 
+              src="https://customer-assets.emergentagent.com/job_data-wizards-3/artifacts/kwz4zwcj_ChatGPT%20Image%2018%20feb%202026%2C%2017_26_31.png" 
+              alt="ALTAMA" 
               style={{ height: '40px', marginBottom: '16px' }}
             />
             <p style={{ 
@@ -22,7 +22,7 @@ const Footer = () => {
               maxWidth: '400px',
               marginTop: '16px'
             }}>
-              Transformamos negocios a través de soluciones tecnológicas innovadoras. Especializados en desarrollo de software, análisis de datos y automatización de procesos.
+              Plataforma de inteligencia operativa impulsada por IA. Transformamos datos en decisiones estratégicas mediante automatización y análisis avanzado.
             </p>
 
             <div className="flex gap-4 mt-6">
