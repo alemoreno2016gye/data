@@ -54,8 +54,8 @@ const Industries = () => {
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.borderColor = 'rgba(0, 255, 209, 0.3)';
-                  e.currentTarget.style.background = 'rgba(0, 255, 209, 0.03)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.03)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
@@ -67,8 +67,8 @@ const Industries = () => {
                   style={{
                     width: '48px',
                     height: '48px',
-                    background: 'rgba(0, 255, 209, 0.08)',
-                    border: '1px solid rgba(0, 255, 209, 0.2)',
+                    background: 'rgba(212, 175, 55, 0.08)',
+                    border: '1px solid rgba(212, 175, 55, 0.2)',
                     borderRadius: '12px',
                     display: 'flex',
                     alignItems: 'center',
@@ -76,7 +76,7 @@ const Industries = () => {
                     margin: '0 auto 16px'
                   }}
                 >
-                  <IconComponent size={24} style={{ color: '#00FFD1' }} />
+                  <IconComponent size={24} style={{ color: '#D4AF37' }} />
                 </div>
 
                 <div style={{ 

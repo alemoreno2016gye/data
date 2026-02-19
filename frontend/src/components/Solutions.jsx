@@ -19,12 +19,12 @@ const Solutions = () => {
           <div 
             className="inline-block px-4 py-2 mb-6"
             style={{
-              background: 'rgba(0, 255, 209, 0.05)',
-              border: '1px solid rgba(0, 255, 209, 0.2)',
+              background: 'rgba(212, 175, 55, 0.05)',
+              border: '1px solid rgba(212, 175, 55, 0.2)',
               borderRadius: '100px'
             }}
           >
-            <span style={{ color: '#00FFD1', fontSize: '14px', fontWeight: '600' }}>SOLUCIONES</span>
+            <span style={{ color: '#D4AF37', fontSize: '14px', fontWeight: '600' }}>SOLUCIONES</span>
           </div>
 
           <h2 style={{ 
@@ -66,9 +66,9 @@ const Solutions = () => {
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = 'translateY(-8px)';
-                  e.currentTarget.style.borderColor = 'rgba(0, 255, 209, 0.4)';
-                  e.currentTarget.style.background = 'rgba(0, 255, 209, 0.02)';
-                  e.currentTarget.style.boxShadow = '0 24px 48px rgba(0, 255, 209, 0.12)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.4)';
+                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.02)';
+                  e.currentTarget.style.boxShadow = '0 24px 48px rgba(212, 175, 55, 0.12)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
@@ -85,7 +85,7 @@ const Solutions = () => {
                     left: 0,
                     right: 0,
                     height: '120px',
-                    background: 'radial-gradient(ellipse at top, rgba(0, 255, 209, 0.08) 0%, transparent 70%)',
+                    background: 'radial-gradient(ellipse at top, rgba(212, 175, 55, 0.08) 0%, transparent 70%)',
                     pointerEvents: 'none'
                   }}
                 />
@@ -95,8 +95,8 @@ const Solutions = () => {
                     style={{
                       width: '64px',
                       height: '64px',
-                      background: 'rgba(0, 255, 209, 0.1)',
-                      border: '1px solid rgba(0, 255, 209, 0.3)',
+                      background: 'rgba(212, 175, 55, 0.1)',
+                      border: '1px solid rgba(212, 175, 55, 0.3)',
                       borderRadius: '16px',
                       display: 'flex',
                       alignItems: 'center',
@@ -104,7 +104,7 @@ const Solutions = () => {
                       marginBottom: '24px'
                     }}
                   >
-                    <IconComponent size={32} style={{ color: '#00FFD1' }} />
+                    <IconComponent size={32} style={{ color: '#D4AF37' }} />
                   </div>
 
                   <h3 style={{ 
@@ -132,7 +132,7 @@ const Solutions = () => {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '8px',
-                      color: '#00FFD1',
+                      color: '#D4AF37',
                       fontSize: '14px',
                       fontWeight: '600',
                       background: 'transparent',

@@ -16,7 +16,7 @@ const ValueProposition = () => {
       <div 
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 255, 209, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 209, 0.5) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)',
           backgroundSize: '60px 60px'
         }}
       />
@@ -62,9 +62,9 @@ const ValueProposition = () => {
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = 'translateY(-8px)';
-                  e.currentTarget.style.borderColor = 'rgba(0, 255, 209, 0.3)';
-                  e.currentTarget.style.background = 'rgba(0, 255, 209, 0.03)';
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 255, 209, 0.1)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.03)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(212, 175, 55, 0.1)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
@@ -81,7 +81,7 @@ const ValueProposition = () => {
                     right: 0,
                     width: '60px',
                     height: '60px',
-                    background: 'radial-gradient(circle at top right, rgba(0, 255, 209, 0.1) 0%, transparent 70%)'
+                    background: 'radial-gradient(circle at top right, rgba(212, 175, 55, 0.1) 0%, transparent 70%)'
                   }}
                 />
 
@@ -89,8 +89,8 @@ const ValueProposition = () => {
                   style={{
                     width: '56px',
                     height: '56px',
-                    background: 'rgba(0, 255, 209, 0.08)',
-                    border: '1px solid rgba(0, 255, 209, 0.2)',
+                    background: 'rgba(212, 175, 55, 0.08)',
+                    border: '1px solid rgba(212, 175, 55, 0.2)',
                     borderRadius: '12px',
                     display: 'flex',
                     alignItems: 'center',
@@ -98,7 +98,7 @@ const ValueProposition = () => {
                     marginBottom: '20px'
                   }}
                 >
-                  <IconComponent size={28} style={{ color: '#00FFD1' }} />
+                  <IconComponent size={28} style={{ color: '#D4AF37' }} />
                 </div>
 
                 <h3 style={{ 

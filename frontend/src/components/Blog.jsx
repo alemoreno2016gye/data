@@ -45,8 +45,8 @@ const Blog = () => {
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = 'translateY(-8px)';
-                e.currentTarget.style.borderColor = '#00FFD1';
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 255, 209, 0.2)';
+                e.currentTarget.style.borderColor = '#D4AF37';
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(212, 175, 55, 0.2)';
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
@@ -67,7 +67,7 @@ const Blog = () => {
                 <div 
                   className="absolute top-4 left-4 px-3 py-1"
                   style={{ 
-                    background: 'rgba(0, 255, 209, 0.9)',
+                    background: 'rgba(212, 175, 55, 0.9)',
                     borderRadius: '0px',
                     fontSize: '14px',
                     fontWeight: '500',
@@ -128,7 +128,7 @@ const Blog = () => {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '8px',
-                      color: '#00FFD1',
+                      color: '#D4AF37',
                       fontSize: '14px',
                       fontWeight: '500',
                       background: 'transparent',

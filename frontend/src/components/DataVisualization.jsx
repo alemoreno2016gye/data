@@ -11,7 +11,7 @@ const DataVisualization = () => {
       <div 
         className="absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 255, 209, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 209, 0.5) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)',
           backgroundSize: '80px 80px'
         }}
       />
@@ -64,7 +64,7 @@ const DataVisualization = () => {
                   gap: '4px',
                   fontSize: '14px',
                   fontWeight: '600',
-                  color: metric.positive ? '#00FFD1' : '#FF6B6B'
+                  color: metric.positive ? '#D4AF37' : '#FF6B6B'
                 }}
               >
                 {metric.positive ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
@@ -96,7 +96,7 @@ const DataVisualization = () => {
 
             <div className="flex gap-6">
               <div className="flex items-center gap-2">
-                <div style={{ width: '12px', height: '12px', background: '#00FFD1', borderRadius: '2px' }} />
+                <div style={{ width: '12px', height: '12px', background: '#D4AF37', borderRadius: '2px' }} />
                 <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.7)' }}>Eficiencia</span>
               </div>
               <div className="flex items-center gap-2">
@@ -132,7 +132,7 @@ const DataVisualization = () => {
                   `${(i / (operationalData.length - 1)) * 1000},${300 - (d.efficiency / 100 * 300)}`
                 ).join(' ')}
                 fill="none"
-                stroke="#00FFD1"
+                stroke="#D4AF37"
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"

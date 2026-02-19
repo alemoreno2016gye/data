@@ -52,12 +52,12 @@ const Contact = () => {
           <div 
             className="inline-block px-4 py-2 mb-6"
             style={{
-              background: 'rgba(0, 255, 209, 0.05)',
-              border: '1px solid rgba(0, 255, 209, 0.2)',
+              background: 'rgba(212, 175, 55, 0.05)',
+              border: '1px solid rgba(212, 175, 55, 0.2)',
               borderRadius: '100px'
             }}
           >
-            <span style={{ color: '#00FFD1', fontSize: '14px', fontWeight: '600' }}>CONTACTO</span>
+            <span style={{ color: '#D4AF37', fontSize: '14px', fontWeight: '600' }}>CONTACTO</span>
           </div>
 
           <h2 style={{ 
@@ -99,15 +99,15 @@ const Contact = () => {
                 <div style={{
                   width: '48px',
                   height: '48px',
-                  background: 'rgba(0, 255, 209, 0.1)',
-                  border: '2px solid #00FFD1',
+                  background: 'rgba(212, 175, 55, 0.1)',
+                  border: '2px solid #D4AF37',
                   borderRadius: '0px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0
                 }}>
-                  <Mail size={24} style={{ color: '#00FFD1' }} />
+                  <Mail size={24} style={{ color: '#D4AF37' }} />
                 </div>
                 <div>
                   <div style={{ fontSize: '18px', fontWeight: '600', color: '#FFFFFF', marginBottom: '4px' }}>
@@ -121,7 +121,7 @@ const Contact = () => {
                       textDecoration: 'none',
                       transition: 'color 0.3s ease'
                     }}
-                    onMouseOver={(e) => e.currentTarget.style.color = '#00FFD1'}
+                    onMouseOver={(e) => e.currentTarget.style.color = '#D4AF37'}
                     onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.85)'}
                   >
                     alemoreno2016gye@gmail.com
@@ -133,15 +133,15 @@ const Contact = () => {
                 <div style={{
                   width: '48px',
                   height: '48px',
-                  background: 'rgba(0, 255, 209, 0.1)',
-                  border: '2px solid #00FFD1',
+                  background: 'rgba(212, 175, 55, 0.1)',
+                  border: '2px solid #D4AF37',
                   borderRadius: '0px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0
                 }}>
-                  <Phone size={24} style={{ color: '#00FFD1' }} />
+                  <Phone size={24} style={{ color: '#D4AF37' }} />
                 </div>
                 <div>
                   <div style={{ fontSize: '18px', fontWeight: '600', color: '#FFFFFF', marginBottom: '4px' }}>
@@ -155,7 +155,7 @@ const Contact = () => {
                       textDecoration: 'none',
                       transition: 'color 0.3s ease'
                     }}
-                    onMouseOver={(e) => e.currentTarget.style.color = '#00FFD1'}
+                    onMouseOver={(e) => e.currentTarget.style.color = '#D4AF37'}
                     onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.85)'}
                   >
                     +593 98 460 1052
@@ -167,15 +167,15 @@ const Contact = () => {
                 <div style={{
                   width: '48px',
                   height: '48px',
-                  background: 'rgba(0, 255, 209, 0.1)',
-                  border: '2px solid #00FFD1',
+                  background: 'rgba(212, 175, 55, 0.1)',
+                  border: '2px solid #D4AF37',
                   borderRadius: '0px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0
                 }}>
-                  <MapPin size={24} style={{ color: '#00FFD1' }} />
+                  <MapPin size={24} style={{ color: '#D4AF37' }} />
                 </div>
                 <div>
                   <div style={{ fontSize: '18px', fontWeight: '600', color: '#FFFFFF', marginBottom: '4px' }}>
@@ -235,8 +235,8 @@ const Contact = () => {
                     outline: 'none'
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = '#00FFD1';
-                    e.target.style.boxShadow = '0 0 0 2px rgba(0, 255, 209, 0.1)';
+                    e.target.style.borderColor = '#D4AF37';
+                    e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.1)';
                   }}
                   onBlur={(e) => {
                     e.target.style.borderColor = 'rgba(255, 255, 255, 0.25)';
@@ -277,8 +277,8 @@ const Contact = () => {
                     outline: 'none'
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = '#00FFD1';
-                    e.target.style.boxShadow = '0 0 0 2px rgba(0, 255, 209, 0.1)';
+                    e.target.style.borderColor = '#D4AF37';
+                    e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.1)';
                   }}
                   onBlur={(e) => {
                     e.target.style.borderColor = 'rgba(255, 255, 255, 0.25)';
@@ -321,8 +321,8 @@ const Contact = () => {
                     fontFamily: 'inherit'
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = '#00FFD1';
-                    e.target.style.boxShadow = '0 0 0 2px rgba(0, 255, 209, 0.1)';
+                    e.target.style.borderColor = '#D4AF37';
+                    e.target.style.boxShadow = '0 0 0 2px rgba(212, 175, 55, 0.1)';
                   }}
                   onBlur={(e) => {
                     e.target.style.borderColor = 'rgba(255, 255, 255, 0.25)';

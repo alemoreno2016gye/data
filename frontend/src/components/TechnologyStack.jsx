@@ -27,7 +27,7 @@ const TechnologyStack = () => {
       <div 
         className="absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 255, 209, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 209, 0.5) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)',
           backgroundSize: '60px 60px'
         }}
       />
@@ -71,8 +71,8 @@ const TechnologyStack = () => {
                   overflow: 'hidden'
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(0, 255, 209, 0.3)';
-                  e.currentTarget.style.background = 'rgba(0, 255, 209, 0.02)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.02)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
@@ -87,7 +87,7 @@ const TechnologyStack = () => {
                     right: 0,
                     width: '100px',
                     height: '100px',
-                    background: 'radial-gradient(circle at top right, rgba(0, 255, 209, 0.06) 0%, transparent 70%)',
+                    background: 'radial-gradient(circle at top right, rgba(212, 175, 55, 0.06) 0%, transparent 70%)',
                     pointerEvents: 'none'
                   }}
                 />
@@ -97,8 +97,8 @@ const TechnologyStack = () => {
                     style={{
                       width: '56px',
                       height: '56px',
-                      background: 'rgba(0, 255, 209, 0.08)',
-                      border: '1px solid rgba(0, 255, 209, 0.2)',
+                      background: 'rgba(212, 175, 55, 0.08)',
+                      border: '1px solid rgba(212, 175, 55, 0.2)',
                       borderRadius: '12px',
                       display: 'flex',
                       alignItems: 'center',
@@ -106,7 +106,7 @@ const TechnologyStack = () => {
                       marginBottom: '20px'
                     }}
                   >
-                    <IconComponent size={28} style={{ color: '#00FFD1' }} />
+                    <IconComponent size={28} style={{ color: '#D4AF37' }} />
                   </div>
 
                   <h3 style={{ 
@@ -135,8 +135,8 @@ const TechnologyStack = () => {
                         key={i}
                         style={{
                           padding: '6px 12px',
-                          background: 'rgba(0, 255, 209, 0.05)',
-                          border: '1px solid rgba(0, 255, 209, 0.15)',
+                          background: 'rgba(212, 175, 55, 0.05)',
+                          border: '1px solid rgba(212, 175, 55, 0.15)',
                           borderRadius: '6px',
                           fontSize: '12px',
                           fontWeight: '500',

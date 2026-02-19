@@ -24,9 +24,9 @@ const Hero = () => {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-sm" style={{ background: 'rgba(0, 255, 209, 0.1)', border: '1px solid rgba(0, 255, 209, 0.3)' }}>
-              <Sparkles size={18} style={{ color: '#00FFD1' }} />
-              <span style={{ color: '#00FFD1', fontSize: '16px', fontWeight: '500' }}>Innovación + Tecnología</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-sm" style={{ background: 'rgba(212, 175, 55, 0.1)', border: '1px solid rgba(212, 175, 55, 0.3)' }}>
+              <Sparkles size={18} style={{ color: '#D4AF37' }} />
+              <span style={{ color: '#D4AF37', fontSize: '16px', fontWeight: '500' }}>Innovación + Tecnología</span>
             </div>
 
             <h1 style={{ 
@@ -38,7 +38,7 @@ const Hero = () => {
               marginBottom: '24px'
             }}>
               Transformamos tu negocio con{' '}
-              <span style={{ color: '#00FFD1' }}>tecnología de vanguardia</span>
+              <span style={{ color: '#D4AF37' }}>tecnología de vanguardia</span>
             </h1>
 
             <p style={{ 
@@ -71,15 +71,15 @@ const Hero = () => {
             {/* Value Props */}
             <div className="grid grid-cols-3 gap-8 pt-8 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.25)' }}>
               <div>
-                <div style={{ fontSize: '32px', fontWeight: '600', color: '#00FFD1' }}>100%</div>
+                <div style={{ fontSize: '32px', fontWeight: '600', color: '#D4AF37' }}>100%</div>
                 <div style={{ fontSize: '16px', color: '#4D4D4D', marginTop: '4px' }}>Personalizado</div>
               </div>
               <div>
-                <div style={{ fontSize: '32px', fontWeight: '600', color: '#00FFD1' }}>24/7</div>
+                <div style={{ fontSize: '32px', fontWeight: '600', color: '#D4AF37' }}>24/7</div>
                 <div style={{ fontSize: '16px', color: '#4D4D4D', marginTop: '4px' }}>Soporte</div>
               </div>
               <div>
-                <div style={{ fontSize: '32px', fontWeight: '600', color: '#00FFD1' }}>∞</div>
+                <div style={{ fontSize: '32px', fontWeight: '600', color: '#D4AF37' }}>∞</div>
                 <div style={{ fontSize: '16px', color: '#4D4D4D', marginTop: '4px' }}>Posibilidades</div>
               </div>
             </div>

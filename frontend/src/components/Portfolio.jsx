@@ -76,8 +76,8 @@ const Portfolio = () => {
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = 'translateY(-8px)';
-                e.currentTarget.style.borderColor = '#00FFD1';
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 255, 209, 0.2)';
+                e.currentTarget.style.borderColor = '#D4AF37';
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(212, 175, 55, 0.2)';
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
@@ -98,7 +98,7 @@ const Portfolio = () => {
                 <div 
                   className="absolute top-4 right-4 px-3 py-1"
                   style={{ 
-                    background: 'rgba(0, 255, 209, 0.9)',
+                    background: 'rgba(212, 175, 55, 0.9)',
                     borderRadius: '0px',
                     fontSize: '14px',
                     fontWeight: '500',
@@ -120,7 +120,7 @@ const Portfolio = () => {
                   justifyContent: 'space-between'
                 }}>
                   {project.title}
-                  <ArrowUpRight size={20} style={{ color: '#00FFD1' }} />
+                  <ArrowUpRight size={20} style={{ color: '#D4AF37' }} />
                 </h3>
 
                 <p style={{ 
@@ -137,30 +137,30 @@ const Portfolio = () => {
                 <div className="flex flex-wrap gap-2 pt-4 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.25)' }}>
                   <span style={{
                     padding: '6px 12px',
-                    background: 'rgba(0, 255, 209, 0.1)',
-                    border: '1px solid rgba(0, 255, 209, 0.3)',
+                    background: 'rgba(212, 175, 55, 0.1)',
+                    border: '1px solid rgba(212, 175, 55, 0.3)',
                     fontSize: '14px',
-                    color: '#00FFD1',
+                    color: '#D4AF37',
                     fontWeight: '500'
                   }}>
                     {project.benefits.benefit1}
                   </span>
                   <span style={{
                     padding: '6px 12px',
-                    background: 'rgba(0, 255, 209, 0.1)',
-                    border: '1px solid rgba(0, 255, 209, 0.3)',
+                    background: 'rgba(212, 175, 55, 0.1)',
+                    border: '1px solid rgba(212, 175, 55, 0.3)',
                     fontSize: '14px',
-                    color: '#00FFD1',
+                    color: '#D4AF37',
                     fontWeight: '500'
                   }}>
                     {project.benefits.benefit2}
                   </span>
                   <span style={{
                     padding: '6px 12px',
-                    background: 'rgba(0, 255, 209, 0.1)',
-                    border: '1px solid rgba(0, 255, 209, 0.3)',
+                    background: 'rgba(212, 175, 55, 0.1)',
+                    border: '1px solid rgba(212, 175, 55, 0.3)',
                     fontSize: '14px',
-                    color: '#00FFD1',
+                    color: '#D4AF37',
                     fontWeight: '500'
                   }}>
                     {project.benefits.benefit3}

@@ -59,8 +59,8 @@ const TimeSeriesChart = ({ data }) => {
                 y={getY(point.value)}
                 width={barWidth}
                 height={barHeight}
-                fill="rgba(0, 255, 209, 0.3)"
-                stroke="#00FFD1"
+                fill="rgba(212, 175, 55, 0.3)"
+                stroke="#D4AF37"
                 strokeWidth="2"
               />
 
@@ -70,7 +70,7 @@ const TimeSeriesChart = ({ data }) => {
                 cy={targetY}
                 r="5"
                 fill="#FFFFFF"
-                stroke="#00FFD1"
+                stroke="#D4AF37"
                 strokeWidth="2"
               />
 
@@ -81,7 +81,7 @@ const TimeSeriesChart = ({ data }) => {
                   y1={targetY}
                   x2={60 + (index + 1) * spacing + barWidth / 2}
                   y2={getY(data[index + 1].target)}
-                  stroke="#00FFD1"
+                  stroke="#D4AF37"
                   strokeWidth="2"
                   strokeDasharray="5,5"
                 />
@@ -102,7 +102,7 @@ const TimeSeriesChart = ({ data }) => {
               <text
                 x={x + barWidth / 2}
                 y={getY(point.value) - 8}
-                fill="#00FFD1"
+                fill="#D4AF37"
                 fontSize="12"
                 fontWeight="600"
                 textAnchor="middle"
@@ -115,11 +115,11 @@ const TimeSeriesChart = ({ data }) => {
 
         {/* Legend */}
         <g transform={`translate(60, ${chartHeight - 50})`}>
-          <rect x={0} y={0} width={20} height={12} fill="rgba(0, 255, 209, 0.3)" stroke="#00FFD1" strokeWidth="2" />
+          <rect x={0} y={0} width={20} height={12} fill="rgba(212, 175, 55, 0.3)" stroke="#D4AF37" strokeWidth="2" />
           <text x={28} y={10} fill="#FFFFFF" fontSize="12">Valor Real</text>
 
-          <circle cx={110} cy={6} r="5" fill="#FFFFFF" stroke="#00FFD1" strokeWidth="2" />
-          <line x1={105} y1={6} x2={115} y2={6} stroke="#00FFD1" strokeWidth="2" strokeDasharray="5,5" />
+          <circle cx={110} cy={6} r="5" fill="#FFFFFF" stroke="#D4AF37" strokeWidth="2" />
+          <line x1={105} y1={6} x2={115} y2={6} stroke="#D4AF37" strokeWidth="2" strokeDasharray="5,5" />
           <text x={125} y={10} fill="#FFFFFF" fontSize="12">Objetivo</text>
         </g>
       </svg>

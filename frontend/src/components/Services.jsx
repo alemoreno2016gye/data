@@ -56,8 +56,8 @@ const Services = () => {
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = 'translateY(-8px)';
-                  e.currentTarget.style.borderColor = '#00FFD1';
-                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 255, 209, 0.2)';
+                  e.currentTarget.style.borderColor = '#D4AF37';
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(212, 175, 55, 0.2)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
@@ -69,8 +69,8 @@ const Services = () => {
                   style={{
                     width: '64px',
                     height: '64px',
-                    background: 'rgba(0, 255, 209, 0.1)',
-                    border: '2px solid #00FFD1',
+                    background: 'rgba(212, 175, 55, 0.1)',
+                    border: '2px solid #D4AF37',
                     borderRadius: '0px',
                     display: 'flex',
                     alignItems: 'center',
@@ -78,7 +78,7 @@ const Services = () => {
                     marginBottom: '24px'
                   }}
                 >
-                  <IconComponent size={32} style={{ color: '#00FFD1' }} />
+                  <IconComponent size={32} style={{ color: '#D4AF37' }} />
                 </div>
 
                 <h3 style={{ 

@@ -16,7 +16,7 @@ const Pricing = () => {
       <div 
         className="absolute top-0 left-1/2 w-[600px] h-[600px] rounded-full opacity-10 blur-[120px]"
         style={{ 
-          background: 'radial-gradient(circle, #00FFD1 0%, transparent 70%)',
+          background: 'radial-gradient(circle, #D4AF37 0%, transparent 70%)',
           transform: 'translateX(-50%)'
         }}
       />
@@ -26,12 +26,12 @@ const Pricing = () => {
           <div 
             className="inline-block px-4 py-2 mb-6"
             style={{
-              background: 'rgba(0, 255, 209, 0.05)',
-              border: '1px solid rgba(0, 255, 209, 0.2)',
+              background: 'rgba(212, 175, 55, 0.05)',
+              border: '1px solid rgba(212, 175, 55, 0.2)',
               borderRadius: '100px'
             }}
           >
-            <span style={{ color: '#00FFD1', fontSize: '14px', fontWeight: '600' }}>PAQUETES</span>
+            <span style={{ color: '#D4AF37', fontSize: '14px', fontWeight: '600' }}>PAQUETES</span>
           </div>
 
           <h2 style={{ 
@@ -59,8 +59,8 @@ const Pricing = () => {
             <div
               key={tier.id}
               style={{
-                background: tier.featured ? 'rgba(0, 255, 209, 0.03)' : 'rgba(255, 255, 255, 0.02)',
-                border: tier.featured ? '2px solid rgba(0, 255, 209, 0.3)' : '1px solid rgba(255, 255, 255, 0.08)',
+                background: tier.featured ? 'rgba(212, 175, 55, 0.03)' : 'rgba(255, 255, 255, 0.02)',
+                border: tier.featured ? '2px solid rgba(212, 175, 55, 0.3)' : '1px solid rgba(255, 255, 255, 0.08)',
                 borderRadius: '24px',
                 padding: '40px',
                 transition: 'all 0.4s ease',
@@ -73,8 +73,8 @@ const Pricing = () => {
               onMouseOver={(e) => {
                 if (!tier.featured) {
                   e.currentTarget.style.transform = 'translateY(-8px)';
-                  e.currentTarget.style.borderColor = 'rgba(0, 255, 209, 0.2)';
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 255, 209, 0.1)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.2)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(212, 175, 55, 0.1)';
                 }
               }}
               onMouseOut={(e) => {
@@ -91,7 +91,7 @@ const Pricing = () => {
                     position: 'absolute',
                     top: '20px',
                     right: '20px',
-                    background: '#00FFD1',
+                    background: '#D4AF37',
                     color: '#000000',
                     fontSize: '12px',
                     fontWeight: '700',
@@ -141,8 +141,8 @@ const Pricing = () => {
                       style={{
                         width: '20px',
                         height: '20px',
-                        background: 'rgba(0, 255, 209, 0.1)',
-                        border: '1px solid rgba(0, 255, 209, 0.3)',
+                        background: 'rgba(212, 175, 55, 0.1)',
+                        border: '1px solid rgba(212, 175, 55, 0.3)',
                         borderRadius: '50%',
                         display: 'flex',
                         alignItems: 'center',
@@ -151,7 +151,7 @@ const Pricing = () => {
                         marginTop: '2px'
                       }}
                     >
-                      <Check size={12} style={{ color: '#00FFD1' }} />
+                      <Check size={12} style={{ color: '#D4AF37' }} />
                     </div>
                     <span style={{ 
                       fontSize: '15px', 
@@ -168,7 +168,7 @@ const Pricing = () => {
                 onClick={scrollToContact}
                 style={{
                   width: '100%',
-                  background: tier.featured ? '#00FFD1' : 'rgba(255, 255, 255, 0.05)',
+                  background: tier.featured ? '#D4AF37' : 'rgba(255, 255, 255, 0.05)',
                   color: tier.featured ? '#000000' : '#FFFFFF',
                   border: tier.featured ? 'none' : '1px solid rgba(255, 255, 255, 0.1)',
                   borderRadius: '12px',
@@ -181,15 +181,15 @@ const Pricing = () => {
                 onMouseOver={(e) => {
                   if (tier.featured) {
                     e.currentTarget.style.background = '#00E6C3';
-                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 255, 209, 0.4)';
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(212, 175, 55, 0.4)';
                   } else {
                     e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                    e.currentTarget.style.borderColor = 'rgba(0, 255, 209, 0.3)';
+                    e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
                   }
                 }}
                 onMouseOut={(e) => {
                   if (tier.featured) {
-                    e.currentTarget.style.background = '#00FFD1';
+                    e.currentTarget.style.background = '#D4AF37';
                     e.currentTarget.style.boxShadow = 'none';
                   } else {
                     e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
@@ -207,8 +207,8 @@ const Pricing = () => {
           className="text-center mt-12"
           style={{
             padding: '32px',
-            background: 'rgba(0, 255, 209, 0.03)',
-            border: '1px solid rgba(0, 255, 209, 0.2)',
+            background: 'rgba(212, 175, 55, 0.03)',
+            border: '1px solid rgba(212, 175, 55, 0.2)',
             borderRadius: '16px'
           }}
         >

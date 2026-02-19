@@ -33,7 +33,7 @@ const Footer = () => {
                 style={{
                   width: '40px',
                   height: '40px',
-                  background: 'rgba(0, 255, 209, 0.1)',
+                  background: 'rgba(212, 175, 55, 0.1)',
                   border: '1px solid rgba(255, 255, 255, 0.25)',
                   borderRadius: '0px',
                   display: 'flex',
@@ -42,15 +42,15 @@ const Footer = () => {
                   transition: 'all 0.3s ease'
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = '#00FFD1';
-                  e.currentTarget.style.background = 'rgba(0, 255, 209, 0.2)';
+                  e.currentTarget.style.borderColor = '#D4AF37';
+                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.2)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
-                  e.currentTarget.style.background = 'rgba(0, 255, 209, 0.1)';
+                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.1)';
                 }}
               >
-                <Linkedin size={20} style={{ color: '#00FFD1' }} />
+                <Linkedin size={20} style={{ color: '#D4AF37' }} />
               </a>
 
               <a 
@@ -60,7 +60,7 @@ const Footer = () => {
                 style={{
                   width: '40px',
                   height: '40px',
-                  background: 'rgba(0, 255, 209, 0.1)',
+                  background: 'rgba(212, 175, 55, 0.1)',
                   border: '1px solid rgba(255, 255, 255, 0.25)',
                   borderRadius: '0px',
                   display: 'flex',
@@ -69,15 +69,15 @@ const Footer = () => {
                   transition: 'all 0.3s ease'
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = '#00FFD1';
-                  e.currentTarget.style.background = 'rgba(0, 255, 209, 0.2)';
+                  e.currentTarget.style.borderColor = '#D4AF37';
+                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.2)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
-                  e.currentTarget.style.background = 'rgba(0, 255, 209, 0.1)';
+                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.1)';
                 }}
               >
-                <Twitter size={20} style={{ color: '#00FFD1' }} />
+                <Twitter size={20} style={{ color: '#D4AF37' }} />
               </a>
 
               <a 
@@ -87,7 +87,7 @@ const Footer = () => {
                 style={{
                   width: '40px',
                   height: '40px',
-                  background: 'rgba(0, 255, 209, 0.1)',
+                  background: 'rgba(212, 175, 55, 0.1)',
                   border: '1px solid rgba(255, 255, 255, 0.25)',
                   borderRadius: '0px',
                   display: 'flex',
@@ -96,15 +96,15 @@ const Footer = () => {
                   transition: 'all 0.3s ease'
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = '#00FFD1';
-                  e.currentTarget.style.background = 'rgba(0, 255, 209, 0.2)';
+                  e.currentTarget.style.borderColor = '#D4AF37';
+                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.2)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
-                  e.currentTarget.style.background = 'rgba(0, 255, 209, 0.1)';
+                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.1)';
                 }}
               >
-                <Github size={20} style={{ color: '#00FFD1' }} />
+                <Github size={20} style={{ color: '#D4AF37' }} />
               </a>
             </div>
           </div>
@@ -130,7 +130,7 @@ const Footer = () => {
                       textDecoration: 'none',
                       transition: 'color 0.3s ease'
                     }}
-                    onMouseOver={(e) => e.currentTarget.style.color = '#00FFD1'}
+                    onMouseOver={(e) => e.currentTarget.style.color = '#D4AF37'}
                     onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.85)'}
                   >
                     {item}
@@ -152,7 +152,7 @@ const Footer = () => {
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'start', gap: '8px' }}>
-                <Mail size={18} style={{ color: '#00FFD1', marginTop: '2px', flexShrink: 0 }} />
+                <Mail size={18} style={{ color: '#D4AF37', marginTop: '2px', flexShrink: 0 }} />
                 <a
                   href="mailto:alemoreno2016gye@gmail.com"
                   style={{
@@ -162,14 +162,14 @@ const Footer = () => {
                     transition: 'color 0.3s ease',
                     wordBreak: 'break-all'
                   }}
-                  onMouseOver={(e) => e.currentTarget.style.color = '#00FFD1'}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#D4AF37'}
                   onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.85)'}
                 >
                   alemoreno2016gye@gmail.com
                 </a>
               </li>
               <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Phone size={18} style={{ color: '#00FFD1', flexShrink: 0 }} />
+                <Phone size={18} style={{ color: '#D4AF37', flexShrink: 0 }} />
                 <a
                   href="tel:+593984601052"
                   style={{
@@ -178,7 +178,7 @@ const Footer = () => {
                     textDecoration: 'none',
                     transition: 'color 0.3s ease'
                   }}
-                  onMouseOver={(e) => e.currentTarget.style.color = '#00FFD1'}
+                  onMouseOver={(e) => e.currentTarget.style.color = '#D4AF37'}
                   onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255, 255, 255, 0.85)'}
                 >
                   +593 98 460 1052
@@ -217,7 +217,7 @@ const Footer = () => {
                 textDecoration: 'none',
                 transition: 'color 0.3s ease'
               }}
-              onMouseOver={(e) => e.currentTarget.style.color = '#00FFD1'}
+              onMouseOver={(e) => e.currentTarget.style.color = '#D4AF37'}
               onMouseOut={(e) => e.currentTarget.style.color = '#4D4D4D'}
             >
               Política de Privacidad
@@ -230,7 +230,7 @@ const Footer = () => {
                 textDecoration: 'none',
                 transition: 'color 0.3s ease'
               }}
-              onMouseOver={(e) => e.currentTarget.style.color = '#00FFD1'}
+              onMouseOver={(e) => e.currentTarget.style.color = '#D4AF37'}
               onMouseOut={(e) => e.currentTarget.style.color = '#4D4D4D'}
             >
               Términos de Servicio

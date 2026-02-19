@@ -15,7 +15,7 @@ const FinalCTA = () => {
       <div 
         className="absolute top-1/2 left-1/2 w-[800px] h-[800px] rounded-full opacity-15 blur-[150px]"
         style={{ 
-          background: 'radial-gradient(circle, #00FFD1 0%, transparent 70%)',
+          background: 'radial-gradient(circle, #D4AF37 0%, transparent 70%)',
           transform: 'translate(-50%, -50%)'
         }}
       />
@@ -24,7 +24,7 @@ const FinalCTA = () => {
       <div 
         className="absolute inset-0 opacity-[0.06]"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 255, 209, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 209, 0.5) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.5) 1px, transparent 1px)',
           backgroundSize: '80px 80px'
         }}
       />
@@ -33,8 +33,8 @@ const FinalCTA = () => {
         <div 
           className="text-center"
           style={{
-            background: 'rgba(0, 255, 209, 0.03)',
-            border: '2px solid rgba(0, 255, 209, 0.2)',
+            background: 'rgba(212, 175, 55, 0.03)',
+            border: '2px solid rgba(212, 175, 55, 0.2)',
             borderRadius: '32px',
             padding: '80px 60px',
             backdropFilter: 'blur(20px)',
@@ -50,7 +50,7 @@ const FinalCTA = () => {
               left: '50%',
               width: '400px',
               height: '400px',
-              background: 'radial-gradient(circle, rgba(0, 255, 209, 0.1) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%)',
               transform: 'translate(-50%, -50%)',
               pointerEvents: 'none'
             }}
@@ -61,13 +61,13 @@ const FinalCTA = () => {
             <div 
               className="inline-flex items-center gap-2 px-4 py-2 mb-6"
               style={{
-                background: 'rgba(0, 255, 209, 0.1)',
-                border: '1px solid rgba(0, 255, 209, 0.3)',
+                background: 'rgba(212, 175, 55, 0.1)',
+                border: '1px solid rgba(212, 175, 55, 0.3)',
                 borderRadius: '100px'
               }}
             >
-              <Sparkles size={16} style={{ color: '#00FFD1' }} />
-              <span style={{ color: '#00FFD1', fontSize: '14px', fontWeight: '600' }}>
+              <Sparkles size={16} style={{ color: '#D4AF37' }} />
+              <span style={{ color: '#D4AF37', fontSize: '14px', fontWeight: '600' }}>
                 COMIENZA HOY
               </span>
             </div>
@@ -85,7 +85,7 @@ const FinalCTA = () => {
               Convierte datos en{' '}
               <span 
                 style={{ 
-                  background: 'linear-gradient(135deg, #00FFD1 0%, #00A896 100%)',
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #B8941F 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text'
@@ -109,7 +109,7 @@ const FinalCTA = () => {
               <button 
                 onClick={scrollToContact}
                 style={{
-                  background: '#00FFD1',
+                  background: '#D4AF37',
                   color: '#000000',
                   border: 'none',
                   borderRadius: '12px',
@@ -124,7 +124,7 @@ const FinalCTA = () => {
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 255, 209, 0.5)';
+                  e.currentTarget.style.boxShadow = '0 12px 32px rgba(212, 175, 55, 0.5)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
@@ -151,7 +151,7 @@ const FinalCTA = () => {
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                  e.currentTarget.style.borderColor = 'rgba(0, 255, 209, 0.5)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.5)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';

@@ -10,12 +10,12 @@ const CaseStudies = () => {
           <div 
             className="inline-block px-4 py-2 mb-6"
             style={{
-              background: 'rgba(0, 255, 209, 0.05)',
-              border: '1px solid rgba(0, 255, 209, 0.2)',
+              background: 'rgba(212, 175, 55, 0.05)',
+              border: '1px solid rgba(212, 175, 55, 0.2)',
               borderRadius: '100px'
             }}
           >
-            <span style={{ color: '#00FFD1', fontSize: '14px', fontWeight: '600' }}>CASOS DE USO</span>
+            <span style={{ color: '#D4AF37', fontSize: '14px', fontWeight: '600' }}>CASOS DE USO</span>
           </div>
 
           <h2 style={{ 
@@ -55,8 +55,8 @@ const CaseStudies = () => {
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = 'translateY(-8px)';
-                e.currentTarget.style.borderColor = 'rgba(0, 255, 209, 0.3)';
-                e.currentTarget.style.boxShadow = '0 24px 48px rgba(0, 255, 209, 0.12)';
+                e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                e.currentTarget.style.boxShadow = '0 24px 48px rgba(212, 175, 55, 0.12)';
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
@@ -72,7 +72,7 @@ const CaseStudies = () => {
                   right: 0,
                   width: '200px',
                   height: '200px',
-                  background: 'radial-gradient(circle at top right, rgba(0, 255, 209, 0.08) 0%, transparent 70%)',
+                  background: 'radial-gradient(circle at top right, rgba(212, 175, 55, 0.08) 0%, transparent 70%)',
                   pointerEvents: 'none'
                 }}
               />
@@ -82,12 +82,12 @@ const CaseStudies = () => {
                 <div 
                   className="inline-block px-3 py-1 mb-4"
                   style={{
-                    background: 'rgba(0, 255, 209, 0.1)',
-                    border: '1px solid rgba(0, 255, 209, 0.3)',
+                    background: 'rgba(212, 175, 55, 0.1)',
+                    border: '1px solid rgba(212, 175, 55, 0.3)',
                     borderRadius: '100px',
                     fontSize: '12px',
                     fontWeight: '600',
-                    color: '#00FFD1'
+                    color: '#D4AF37'
                   }}
                 >
                   {study.industry}
@@ -104,7 +104,7 @@ const CaseStudies = () => {
                   justifyContent: 'space-between'
                 }}>
                   {study.title}
-                  <ArrowUpRight size={24} style={{ color: '#00FFD1', opacity: 0.6 }} />
+                  <ArrowUpRight size={24} style={{ color: '#D4AF37', opacity: 0.6 }} />
                 </h3>
 
                 <div style={{ marginBottom: '24px' }}>
@@ -128,14 +128,14 @@ const CaseStudies = () => {
                 {/* Key metric */}
                 <div 
                   style={{
-                    background: 'rgba(0, 255, 209, 0.05)',
-                    border: '1px solid rgba(0, 255, 209, 0.2)',
+                    background: 'rgba(212, 175, 55, 0.05)',
+                    border: '1px solid rgba(212, 175, 55, 0.2)',
                     borderRadius: '16px',
                     padding: '24px',
                     marginBottom: '20px'
                   }}
                 >
-                  <div style={{ fontSize: '48px', fontWeight: '700', color: '#00FFD1', marginBottom: '4px' }}>
+                  <div style={{ fontSize: '48px', fontWeight: '700', color: '#D4AF37', marginBottom: '4px' }}>
                     {study.metric}
                   </div>
                   <div style={{ fontSize: '14px', fontWeight: '600', color: 'rgba(255, 255, 255, 0.7)' }}>
@@ -167,7 +167,7 @@ const CaseStudies = () => {
                             top: '7px',
                             width: '6px',
                             height: '6px',
-                            background: '#00FFD1',
+                            background: '#D4AF37',
                             borderRadius: '50%'
                           }}
                         />
