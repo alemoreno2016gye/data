@@ -15,9 +15,9 @@ const Header = () => {
 
   const navItems = [
     { label: 'Inicio', href: '#hero' },
-    { label: 'Servicios', href: '#servicios' },
-    { label: 'Portafolio', href: '#portafolio' },
-    { label: 'Blog', href: '#blog' },
+    { label: 'Soluciones', href: '#soluciones' },
+    { label: 'Casos de Uso', href: '#' },
+    { label: 'Precios', href: '#pricing' },
     { label: 'Contacto', href: '#contacto' }
   ];
 
@@ -35,8 +35,8 @@ const Header = () => {
       <div className="flex items-center justify-between w-full max-w-[1400px] mx-auto">
         <a href="#hero" onClick={(e) => scrollToSection(e, '#hero')}>
           <img 
-            src="https://customer-assets.emergentagent.com/job_f48e3a24-1531-44b1-ab33-e0efd1b3fda9/artifacts/y7u8wioc_altama.png" 
-            alt="ALTAMA CONSULTING" 
+            src="https://customer-assets.emergentagent.com/job_data-wizards-3/artifacts/kwz4zwcj_ChatGPT%20Image%2018%20feb%202026%2C%2017_26_31.png" 
+            alt="ALTAMA" 
             className="dark-logo"
           />
         </a>

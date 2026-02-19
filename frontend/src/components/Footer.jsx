@@ -120,10 +120,10 @@ const Footer = () => {
               Enlaces Rápidos
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {['Inicio', 'Servicios', 'Portafolio', 'Blog', 'Contacto'].map((item) => (
+              {['Inicio', 'Soluciones', 'Casos de Uso', 'Precios', 'Contacto'].map((item) => (
                 <li key={item} style={{ marginBottom: '12px' }}>
                   <a
-                    href={`#${item.toLowerCase()}`}
+                    href={`#${item.toLowerCase().replace(/ /g, '-')}`}
                     style={{
                       fontSize: '16px',
                       color: 'rgba(255, 255, 255, 0.85)',
@@ -205,7 +205,7 @@ const Footer = () => {
             color: '#4D4D4D',
             margin: 0
           }}>
-            © {currentYear} ALTAMA CONSULTING. Todos los derechos reservados.
+            © {currentYear} ALTAMA. Todos los derechos reservados.
           </p>
 
           <div className="flex gap-6">
