@@ -1,4 +1,4 @@
-/* ALTAMA CONSULTING - Dark Theme Styles */
+/* ALTAMA - Dark Theme Styles */
 
 /* Core Variables */
 :root {
@@ -16,10 +16,11 @@
   --border-subtle: rgba(255, 255, 255, 0.25);
   --border-medium: rgba(255, 255, 255, 0.4);
   
-  /* Brand Colors */
-  --brand-primary: #00FFD1;
-  --brand-hover: rgba(0, 255, 209, 0.1);
-  --brand-active: #6FD2C0;
+  /* Brand Colors - Gold & Silver from logo */
+  --brand-gold: #D4AF37;
+  --brand-silver: #C0C0C0;
+  --brand-gold-hover: rgba(212, 175, 55, 0.1);
+  --brand-silver-hover: rgba(192, 192, 192, 0.1);
 }
 
 * {
@@ -58,9 +59,10 @@ body {
 }
 
 .dark-logo {
-  height: 40px;
+  height: 60px;
   object-fit: contain;
   cursor: pointer;
+  filter: brightness(1.1);
 }
 
 .dark-nav {
@@ -87,13 +89,13 @@ body {
 
 /* Button Styles */
 .btn-primary {
-  background: var(--brand-primary);
+  background: linear-gradient(135deg, #D4AF37 0%, #F4E4A6 100%);
   color: #000000;
   border: none;
-  border-radius: 0px;
+  border-radius: 8px;
   padding: 14px 24px;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   min-height: 56px;
@@ -107,14 +109,12 @@ body {
 }
 
 .btn-primary:hover {
-  background: var(--brand-hover);
-  color: var(--brand-primary);
+  background: linear-gradient(135deg, #F4E4A6 0%, #D4AF37 100%);
   transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(0, 255, 209, 0.3);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
 }
 
 .btn-primary:active {
-  background: var(--brand-active);
   transform: scale(0.98);
 }
 
