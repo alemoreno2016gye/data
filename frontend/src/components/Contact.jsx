@@ -49,24 +49,36 @@ const Contact = () => {
       <div className="max-w-[1400px] mx-auto px-[7.6923%]">
         {/* Section Header */}
         <div className="text-center mb-16">
+          <div 
+            className="inline-block px-4 py-2 mb-6"
+            style={{
+              background: 'rgba(0, 255, 209, 0.05)',
+              border: '1px solid rgba(0, 255, 209, 0.2)',
+              borderRadius: '100px'
+            }}
+          >
+            <span style={{ color: '#00FFD1', fontSize: '14px', fontWeight: '600' }}>CONTACTO</span>
+          </div>
+
           <h2 style={{ 
             fontSize: '48px', 
-            fontWeight: '600', 
+            fontWeight: '700', 
             lineHeight: '1.1', 
             color: '#FFFFFF',
-            marginBottom: '16px'
+            marginBottom: '16px',
+            letterSpacing: '-1px'
           }}>
-            Comencemos a construir tu solución
+            Hablemos de tu proyecto
           </h2>
           <p style={{ 
             fontSize: '20px', 
-            fontWeight: '500', 
-            lineHeight: '1.5', 
-            color: 'rgba(255, 255, 255, 0.85)',
+            fontWeight: '400', 
+            lineHeight: '1.6', 
+            color: 'rgba(255, 255, 255, 0.6)',
             maxWidth: '700px',
             margin: '0 auto'
           }}>
-            Agenda una consulta gratuita y cuéntanos sobre tu proyecto. Juntos encontraremos la mejor solución tecnológica para tu negocio.
+            Nuestro equipo te responderá en menos de 24 horas
           </p>
         </div>
 

@@ -2,10 +2,15 @@ import React from "react";
 import "@/App.css";
 import { Toaster } from 'sonner';
 import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import Services from '@/components/Services';
-import Portfolio from '@/components/Portfolio';
-import Blog from '@/components/Blog';
+import SaasHero from '@/components/SaasHero';
+import ValueProposition from '@/components/ValueProposition';
+import Solutions from '@/components/Solutions';
+import DataVisualization from '@/components/DataVisualization';
+import Industries from '@/components/Industries';
+import Pricing from '@/components/Pricing';
+import CaseStudies from '@/components/CaseStudies';
+import TechnologyStack from '@/components/TechnologyStack';
+import FinalCTA from '@/components/FinalCTA';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -15,10 +20,15 @@ function App() {
       <Toaster position="top-right" richColors />
       <Header />
       <main>
-        <Hero />
-        <Services />
-        <Portfolio />
-        <Blog />
+        <SaasHero />
+        <ValueProposition />
+        <Solutions />
+        <DataVisualization />
+        <Industries />
+        <Pricing />
+        <CaseStudies />
+        <TechnologyStack />
+        <FinalCTA />
         <Contact />
       </main>
       <Footer />
