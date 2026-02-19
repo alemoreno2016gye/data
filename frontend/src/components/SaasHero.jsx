@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Target } from 'lucide-react';
 import { COLORS } from '../constants/colors';
+import InteractiveDashboard from './InteractiveDashboard';
 
 const SaasHero = () => {
   const scrollToContact = () => {
@@ -37,7 +38,7 @@ const SaasHero = () => {
       />
 
       <div className="max-w-[1400px] mx-auto px-[7.6923%] py-20 relative z-10">
-        <div className="text-center max-w-[900px] mx-auto">
+        <div className="text-center max-w-[900px] mx-auto mb-16">
           {/* Badge */}
           <div 
             className="inline-flex items-center gap-2 px-4 py-2 mb-8 backdrop-blur-md"
@@ -148,83 +149,10 @@ const SaasHero = () => {
               Ver soluciones
             </button>
           </div>
-
-          {/* Dashboard Preview Placeholder */}
-          <div 
-            className="relative mx-auto"
-            style={{
-              maxWidth: '1000px',
-              height: '500px',
-              background: COLORS.goldBg,
-              border: `1px solid ${COLORS.goldBorder}`,
-              borderRadius: '12px',
-              backdropFilter: 'blur(20px)',
-              padding: '24px',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            {/* Inner grid */}
-            <div 
-              className="absolute inset-0 opacity-[0.15]"
-              style={{
-                backgroundImage: `linear-gradient(${COLORS.goldBorder} 1px, transparent 1px), linear-gradient(90deg, ${COLORS.goldBorder} 1px, transparent 1px)`,
-                backgroundSize: '40px 40px'
-              }}
-            />
-
-            {/* Mockup content */}
-            <div className="relative z-10 h-full flex items-center justify-center">
-              <div className="text-center">
-                <div 
-                  style={{
-                    width: '80px',
-                    height: '80px',
-                    background: COLORS.goldBg,
-                    border: `2px solid ${COLORS.goldBorder}`,
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '0 auto 16px'
-                  }}
-                >
-                  <Target size={32} style={{ color: COLORS.gold }} />
-                </div>
-                <p style={{ color: COLORS.whiteFaded, fontSize: '14px' }}>
-                  Decisiones basadas en datos
-                </p>
-              </div>
-            </div>
-
-            {/* Floating elements */}
-            <div 
-              className="absolute top-8 left-8 px-4 py-2"
-              style={{
-                background: COLORS.goldBg,
-                border: `1px solid ${COLORS.goldBorder}`,
-                borderRadius: '6px',
-                backdropFilter: 'blur(10px)'
-              }}
-            >
-              <div style={{ fontSize: '12px', color: COLORS.whiteSubtle }}>Eficiencia</div>
-              <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.gold }}>+42%</div>
-            </div>
-
-            <div 
-              className="absolute top-8 right-8 px-4 py-2"
-              style={{
-                background: COLORS.silverBg,
-                border: `1px solid ${COLORS.silverBorder}`,
-                borderRadius: '6px',
-                backdropFilter: 'blur(10px)'
-              }}
-            >
-              <div style={{ fontSize: '12px', color: COLORS.whiteSubtle }}>Riesgo</div>
-              <div style={{ fontSize: '20px', fontWeight: '700', color: COLORS.silver }}>-35%</div>
-            </div>
-          </div>
         </div>
+
+        {/* Interactive Dashboard */}
+        <InteractiveDashboard />
       </div>
 
       <style>{`
