@@ -23,8 +23,10 @@ class UI:
 def get_product_catalog(df: pd.DataFrame) -> pd.DataFrame:
     cols = ["Producto", "Producto_Nombre", "Capitulo", "Capitulo_Nombre"]
     base = df[cols].dropna(subset=["Producto"]).copy()
-    base["Producto"] = base["Producto"].astype(str).str.zfill(6)
-    return base.drop_duplicates(subset=["Producto"]).sort_values(["Producto_Nombre", "Producto"])
+    base["Codigo"] = base["Producto"].astype(str).str.zfill(6)
+    base["Producto"] = base["Producto_Nombre"].fillna("Producto sin nombre")
+    base = base.drop_duplicates(subset=["Codigo"]).sort_values(["Producto", "Codigo"])
+    return base[["Codigo", "Producto", "Capitulo", "Capitulo_Nombre"]]
 
 
 def is_china_col(df: pd.DataFrame) -> pd.Series:
@@ -57,16 +59,14 @@ def dependency_table(df_world: pd.DataFrame, value_col: str, year_a: int, year_b
 def chart_dependency_unique_names(dep: pd.DataFrame, catalog: pd.DataFrame, year_b: int, topn: int) -> pd.DataFrame:
     if dep.empty:
         return dep
-    out = dep.merge(catalog[["Producto", "Producto_Nombre"]], on="Producto", how="left")
-    out["Producto_Nombre"] = out["Producto_Nombre"].fillna("Producto sin nombre")
+    out = dep.merge(catalog[["Codigo", "Producto"]], left_on="Producto", right_on="Codigo", how="left")
+    out["Producto"] = out["Producto"].fillna("Producto sin nombre")
 
     # Evita barras duplicadas por nombre: consolida por nombre sumando numeradores/denominadores
     yb_share = f"Share_{year_b}"
     yb_china = f"China_{year_b}"
     yb_world = f"World_{year_b}"
-    grp = (
-        out.groupby("Producto_Nombre", observed=True)[[yb_china, yb_world]].sum().reset_index()
-    )
+    grp = out.groupby("Producto", observed=True)[[yb_china, yb_world]].sum().reset_index()
     grp[yb_share] = np.where(grp[yb_world] > 0, grp[yb_china] / grp[yb_world], np.nan)
     return grp.sort_values(yb_share, ascending=False).head(topn)
 
@@ -130,7 +130,7 @@ def page_dependencia(core: dict[str, pd.DataFrame]) -> None:
         fig = px.bar(
             exp_chart.sort_values(f"Share_{year_b}"),
             x=f"Share_{year_b}",
-            y="Producto_Nombre",
+            y="Producto",
             orientation="h",
             title=f"Top dependencia export {year_b}",
         )
@@ -142,7 +142,7 @@ def page_dependencia(core: dict[str, pd.DataFrame]) -> None:
         fig = px.bar(
             imp_chart.sort_values(f"Share_{year_b}"),
             x=f"Share_{year_b}",
-            y="Producto_Nombre",
+            y="Producto",
             orientation="h",
             title=f"Top dependencia import {year_b}",
         )
@@ -150,7 +150,7 @@ def page_dependencia(core: dict[str, pd.DataFrame]) -> None:
 
     st.divider()
     st.markdown("#### Comparativa por búsqueda de producto (nombre o código)")
-    options = [f"{r.Producto} | {r.Producto_Nombre}" for r in catalog.itertuples(index=False)]
+    options = [f"{r.Codigo} | {r.Producto}" for r in catalog.itertuples(index=False)]
     selected = st.selectbox("Producto", options)
     code = selected.split(" | ")[0]
 
@@ -182,6 +182,7 @@ def page_productos(core: dict[str, pd.DataFrame]) -> None:
         a = df[df["Anio"] == year_a].groupby(["Producto", "Producto_Nombre"], observed=True)[value_col].sum().rename(str(year_a))
         b = df[df["Anio"] == year_b].groupby(["Producto", "Producto_Nombre"], observed=True)[value_col].sum().rename(str(year_b))
         out = pd.concat([a, b], axis=1).fillna(0).reset_index()
+        out = out.rename(columns={"Producto_Nombre": "Producto"})
         out["Delta"] = out[str(year_b)] - out[str(year_a)]
         out["Crec_%"] = np.where(out[str(year_a)] > 0, out["Delta"] / out[str(year_a)], np.nan)
         return out.sort_values(str(year_b), ascending=False).head(30)
@@ -211,7 +212,8 @@ def page_estacionalidad(core: dict[str, pd.DataFrame]) -> None:
     dz = base[base["Anio"] == year]
     agg = dz.groupby(["Capitulo_Nombre", "Producto_Nombre"], observed=True)[value_col].sum().reset_index()
     agg = agg[agg[value_col] > 0]
-    st.plotly_chart(px.treemap(agg, path=["Capitulo_Nombre", "Producto_Nombre"], values=value_col), use_container_width=True)
+    agg = agg.rename(columns={"Producto_Nombre": "Producto"})
+    st.plotly_chart(px.treemap(agg, path=["Capitulo_Nombre", "Producto"], values=value_col), use_container_width=True)
 
 
 def page_trademap(core: dict[str, pd.DataFrame]) -> None:
