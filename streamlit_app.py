@@ -51,7 +51,9 @@ def dependency_table(df_world: pd.DataFrame, value_col: str, year_a: int, year_b
     b = out[out["Anio"] == year_b][["Producto", "Share", "China", "World"]].rename(
         columns={"Share": f"Share_{year_b}", "China": f"China_{year_b}", "World": f"World_{year_b}"}
     )
-    comp = a.merge(b, on="Producto", how="outer").fillna(0)
+    comp = a.merge(b, on="Producto", how="outer")
+    num_cols = [c for c in comp.columns if c != "Producto"]
+    comp[num_cols] = comp[num_cols].fillna(0)
     comp["Delta_Share"] = comp[f"Share_{year_b}"] - comp[f"Share_{year_a}"]
     return comp
 
@@ -60,7 +62,7 @@ def chart_dependency_unique_names(dep: pd.DataFrame, catalog: pd.DataFrame, year
     if dep.empty:
         return dep
     out = dep.merge(catalog[["Codigo", "Producto"]], left_on="Producto", right_on="Codigo", how="left")
-    out["Producto"] = out["Producto"].fillna("Producto sin nombre")
+    out["Producto"] = out["Producto"].astype("string").fillna("Producto sin nombre")
 
     # Evita barras duplicadas por nombre: consolida por nombre sumando numeradores/denominadores
     yb_share = f"Share_{year_b}"
@@ -178,14 +180,33 @@ def page_productos(core: dict[str, pd.DataFrame]) -> None:
     year_a = c1.selectbox("Año comparación 1", years, index=max(0, len(years) - 2), key="p3_a")
     year_b = c2.selectbox("Año comparación 2", years, index=len(years) - 1, key="p3_b")
 
+    if year_a == year_b:
+        st.warning("Elegiste el mismo año en ambas comparaciones; se mostrará una segunda columna de comparación con el mismo año para evitar errores de columnas duplicadas.")
+
     def compare(df: pd.DataFrame, value_col: str) -> pd.DataFrame:
-        a = df[df["Anio"] == year_a].groupby(["Producto", "Producto_Nombre"], observed=True)[value_col].sum().rename(str(year_a))
-        b = df[df["Anio"] == year_b].groupby(["Producto", "Producto_Nombre"], observed=True)[value_col].sum().rename(str(year_b))
+        col_a = str(year_a)
+        col_b = str(year_b) if year_b != year_a else f"{year_b} (comparación)"
+
+        a = (
+            df[df["Anio"] == year_a]
+            .groupby(["Producto", "Producto_Nombre"], observed=True)[value_col]
+            .sum()
+            .rename(col_a)
+        )
+        b = (
+            df[df["Anio"] == year_b]
+            .groupby(["Producto", "Producto_Nombre"], observed=True)[value_col]
+            .sum()
+            .rename(col_b)
+        )
         out = pd.concat([a, b], axis=1).fillna(0).reset_index()
-        out = out.rename(columns={"Producto_Nombre": "Producto"})
-        out["Delta"] = out[str(year_b)] - out[str(year_a)]
-        out["Crec_%"] = np.where(out[str(year_a)] > 0, out["Delta"] / out[str(year_a)], np.nan)
-        return out.sort_values(str(year_b), ascending=False).head(30)
+
+        # Evita columnas duplicadas en Streamlit/PyArrow: código y etiqueta separados
+        out = out.rename(columns={"Producto": "Codigo", "Producto_Nombre": "Producto"})
+
+        out["Delta"] = out[col_b] - out[col_a]
+        out["Crec_%"] = np.where(out[col_a] > 0, out["Delta"] / out[col_a], np.nan)
+        return out.sort_values(col_b, ascending=False).head(30)
 
     left, right = st.columns(2)
     left.dataframe(compare(exp_cn, "FOB"), use_container_width=True, height=330)
