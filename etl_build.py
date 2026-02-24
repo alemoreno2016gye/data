@@ -247,79 +247,140 @@ class KPIBuilder:
         return out
 
     @staticmethod
-    def share_china_by_year_product(df_world: pd.DataFrame, value_col: str) -> pd.DataFrame:
-        if df_world.empty or value_col not in df_world.columns:
-            return pd.DataFrame(columns=["Anio", "Producto", "world_value", "china_value", "world_partner_count", "share"])
+    def _group_col(df_world: pd.DataFrame, group_level: str) -> str:
+        if group_level in df_world.columns:
+            return group_level
+        return "Producto_Nombre" if "Producto_Nombre" in df_world.columns else "Producto"
 
-        world = df_world.groupby(["Anio", "Producto"], observed=True)[value_col].sum().rename("world_value")
+    @staticmethod
+    def share_china_by_year_product(df_world: pd.DataFrame, value_col: str, group_level: str = "Producto_Nombre") -> pd.DataFrame:
+        if df_world.empty or value_col not in df_world.columns:
+            return pd.DataFrame(columns=["Anio", "Producto_Agrupado", "world_value", "china_value", "world_partner_count", "share"])
+
+        key = KPIBuilder._group_col(df_world, group_level)
+
+        world = df_world.groupby(["Anio", key], observed=True)[value_col].sum().rename("world_value")
         china = (
             df_world[df_world["Es_China"]]
-            .groupby(["Anio", "Producto"], observed=True)[value_col]
+            .groupby(["Anio", key], observed=True)[value_col]
             .sum()
             .rename("china_value")
         )
-        partner_count = df_world.groupby(["Anio", "Producto"], observed=True)["Pais_UP"].nunique().rename("world_partner_count")
+        partner_count = df_world.groupby(["Anio", key], observed=True)["Pais_UP"].nunique().rename("world_partner_count")
         out = pd.concat([world, china, partner_count], axis=1).fillna(0).reset_index()
+        out = out.rename(columns={key: "Producto_Agrupado"})
         out["share_raw"] = np.where(out["world_value"] > 0, out["china_value"] / out["world_value"], np.nan)
         out["share"] = np.where((out["world_value"] > 0) & (out["world_partner_count"] > 1), out["share_raw"], np.nan)
         return out.drop(columns=["share_raw"])
 
     @staticmethod
-    def hhi_partners_by_year_product(df_world: pd.DataFrame, value_col: str) -> pd.DataFrame:
+    def hhi_partners_by_year_product(df_world: pd.DataFrame, value_col: str, group_level: str = "Producto_Nombre") -> pd.DataFrame:
         if df_world.empty or value_col not in df_world.columns:
-            return pd.DataFrame(columns=["Anio", "Producto", "HHI"])
-        g = df_world.groupby(["Anio", "Producto", "Pais_UP"], observed=True)[value_col].sum().reset_index()
-        tot = g.groupby(["Anio", "Producto"], observed=True)[value_col].transform("sum")
+            return pd.DataFrame(columns=["Anio", "Producto_Agrupado", "HHI"])
+        key = KPIBuilder._group_col(df_world, group_level)
+        g = df_world.groupby(["Anio", key, "Pais_UP"], observed=True)[value_col].sum().reset_index()
+        tot = g.groupby(["Anio", key], observed=True)[value_col].transform("sum")
         g["s"] = np.where(tot > 0, g[value_col] / tot, np.nan)
-        return g.groupby(["Anio", "Producto"], observed=True)["s"].apply(lambda x: float(np.nansum(x**2))).rename("HHI").reset_index()
+        out = g.groupby(["Anio", key], observed=True)["s"].apply(lambda x: float(np.nansum(x**2))).rename("HHI").reset_index()
+        return out.rename(columns={key: "Producto_Agrupado"})
 
     @staticmethod
-    def vulnerability_index(df_world: pd.DataFrame, value_col_world: str, value_col_china: str, years_window: int = 8) -> pd.DataFrame:
+    def vulnerability_index(
+        df_world: pd.DataFrame,
+        value_col_world: str,
+        value_col_china: str,
+        years_window: int = 8,
+        group_level: str = "Producto_Nombre",
+    ) -> pd.DataFrame:
         if df_world.empty or value_col_world not in df_world.columns or value_col_china not in df_world.columns:
-            return pd.DataFrame(columns=["Producto", "AnioMax", "share", "vol_yoy", "vulnerability"])
+            return pd.DataFrame(columns=["Producto_Agrupado", "AnioMax", "share", "vol_yoy", "vulnerability"])
 
-        share_tbl = KPIBuilder.share_china_by_year_product(df_world, value_col_world)
-        share_avg = share_tbl.groupby("Producto", observed=True)["share"].mean(numeric_only=True).rename("share").reset_index()
+        key = KPIBuilder._group_col(df_world, group_level)
+
+        share_tbl = KPIBuilder.share_china_by_year_product(df_world, value_col_world, group_level=key)
+        share_avg = share_tbl.groupby("Producto_Agrupado", observed=True)["share"].mean(numeric_only=True).rename("share").reset_index()
 
         d_ch = df_world[df_world["Es_China"]].copy()
-        annual = d_ch.groupby(["Producto", "Anio"], observed=True)[value_col_china].sum().reset_index().sort_values(["Producto", "Anio"])
-        annual["yoy"] = annual.groupby("Producto", observed=True)[value_col_china].pct_change()
+        annual = d_ch.groupby([key, "Anio"], observed=True)[value_col_china].sum().reset_index().sort_values([key, "Anio"])
+        annual["yoy"] = annual.groupby(key, observed=True)[value_col_china].pct_change()
 
         max_year = int(df_world["Anio"].max())
         min_win = max_year - years_window + 1
         win = annual[(annual["Anio"] >= min_win) & (annual["Anio"] <= max_year)]
-        vol = win.groupby("Producto", observed=True)["yoy"].std().rename("vol_yoy").reset_index()
+        vol = win.groupby(key, observed=True)["yoy"].std().rename("vol_yoy").reset_index().rename(columns={key: "Producto_Agrupado"})
 
-        out = share_avg.merge(vol, on="Producto", how="left")
+        out = share_avg.merge(vol, on="Producto_Agrupado", how="left")
         out["AnioMax"] = max_year
         out["vulnerability"] = out["share"] * out["vol_yoy"]
         return out
 
     @staticmethod
-    def top_products_bilateral_all_years(df_cn: pd.DataFrame, value_col: str, topn: int = 30) -> pd.DataFrame:
+    def top_products_bilateral_all_years(df_cn: pd.DataFrame, value_col: str, topn: int = 30, group_level: str = "Producto_Nombre") -> pd.DataFrame:
         if df_cn.empty or value_col not in df_cn.columns:
-            return pd.DataFrame(columns=["Anio", "Producto", "Producto_Nombre", value_col])
+            return pd.DataFrame(columns=["Anio", "Producto_Agrupado", value_col])
+        key = KPIBuilder._group_col(df_cn, group_level)
         base = (
-            df_cn.groupby(["Anio", "Producto", "Producto_Nombre"], observed=True, dropna=False)[value_col]
+            df_cn.groupby(["Anio", key], observed=True, dropna=False)[value_col]
             .sum()
             .reset_index()
         )
+        base = base.rename(columns={key: "Producto_Agrupado"})
         return base.sort_values(["Anio", value_col], ascending=[True, False]).groupby("Anio", observed=True).head(topn).reset_index(drop=True)
 
     @staticmethod
-    def yoy_volatility_bilateral(df_cn: pd.DataFrame, value_col: str) -> pd.DataFrame:
+    def yoy_volatility_bilateral(df_cn: pd.DataFrame, value_col: str, group_level: str = "Producto_Nombre") -> pd.DataFrame:
         if df_cn.empty or value_col not in df_cn.columns:
-            return pd.DataFrame(columns=["Producto", "Producto_Nombre", "Volatilidad_YoY"])
-        annual = df_cn.groupby(["Producto", "Producto_Nombre", "Anio"], observed=True)[value_col].sum().reset_index()
-        annual = annual.sort_values(["Producto", "Anio"])
-        annual["yoy"] = annual.groupby("Producto", observed=True)[value_col].pct_change()
+            return pd.DataFrame(columns=["Producto_Agrupado", "Volatilidad_YoY"])
+        key = KPIBuilder._group_col(df_cn, group_level)
+        annual = df_cn.groupby([key, "Anio"], observed=True)[value_col].sum().reset_index()
+        annual = annual.sort_values([key, "Anio"])
+        annual["yoy"] = annual.groupby(key, observed=True)[value_col].pct_change()
         return (
-            annual.groupby(["Producto", "Producto_Nombre"], observed=True)["yoy"]
+            annual.groupby([key], observed=True)["yoy"]
             .std()
             .rename("Volatilidad_YoY")
             .dropna()
             .reset_index()
-        )
+        ).rename(columns={key: "Producto_Agrupado"})
+
+    @staticmethod
+    def top_products_by_chapter(df_world: pd.DataFrame, value_col: str, topn: int = 10, group_level: str = "Producto_Nombre") -> pd.DataFrame:
+        if df_world.empty or value_col not in df_world.columns:
+            return pd.DataFrame(columns=["Anio", "Capitulo", "Capitulo_Nombre", "Producto_Agrupado", "Value", "Chapter_Product_Share", "National_Share"])
+        key = KPIBuilder._group_col(df_world, group_level)
+        g = df_world.groupby(["Anio", "Capitulo", "Capitulo_Nombre", key], observed=True, dropna=False)[value_col].sum().reset_index().rename(columns={value_col: "Value", key: "Producto_Agrupado"})
+        chapter_tot = g.groupby(["Anio", "Capitulo"], observed=True)["Value"].transform("sum")
+        nat_tot = g.groupby(["Anio"], observed=True)["Value"].transform("sum")
+        g["Chapter_Product_Share"] = np.where(chapter_tot > 0, g["Value"] / chapter_tot, np.nan)
+        g["National_Share"] = np.where(nat_tot > 0, g["Value"] / nat_tot, np.nan)
+        return g.sort_values(["Anio", "Capitulo", "Value"], ascending=[True, True, False]).groupby(["Anio", "Capitulo"], observed=True).head(topn).reset_index(drop=True)
+
+    @staticmethod
+    def import_share_china_structural(df_imp_world: pd.DataFrame) -> pd.DataFrame:
+        if df_imp_world.empty or "CIF" not in df_imp_world.columns:
+            return pd.DataFrame(columns=["Anio", "Total_Import", "Import_China", "Share_China", "Breakpoint", "Slope_Pre", "Slope_Post", "Index_Structural"])
+        y = df_imp_world.groupby("Anio", observed=True)["CIF"].sum().rename("Total_Import")
+        c = df_imp_world[df_imp_world["Es_China"]].groupby("Anio", observed=True)["CIF"].sum().rename("Import_China")
+        s = pd.concat([y, c], axis=1).fillna(0).reset_index().sort_values("Anio")
+        s["Share_China"] = np.where(s["Total_Import"] > 0, s["Import_China"] / s["Total_Import"], np.nan)
+        if len(s) >= 6:
+            vals = s["Share_China"].to_numpy(dtype=float)
+            years = s["Anio"].to_numpy(dtype=float)
+            cands = range(2, len(s) - 2)
+            best_i = min(cands, key=lambda i: np.nansum((vals[:i] - np.polyval(np.polyfit(years[:i], vals[:i], 1), years[:i])) ** 2) + np.nansum((vals[i:] - np.polyval(np.polyfit(years[i:], vals[i:], 1), years[i:])) ** 2))
+            pre = np.polyfit(years[:best_i], vals[:best_i], 1)[0]
+            post = np.polyfit(years[best_i:], vals[best_i:], 1)[0]
+            s["Breakpoint"] = int(s.iloc[best_i]["Anio"])
+            s["Slope_Pre"] = pre
+            s["Slope_Post"] = post
+            growth_post = np.nanmean(np.diff(vals[best_i:])) if len(vals[best_i:]) > 1 else 0
+            s["Index_Structural"] = s["Share_China"] * (post - pre) * growth_post
+        else:
+            s["Breakpoint"] = np.nan
+            s["Slope_Pre"] = np.nan
+            s["Slope_Post"] = np.nan
+            s["Index_Structural"] = np.nan
+        return s
 
     @staticmethod
     def heatmap_month_year(df_cn: pd.DataFrame, value_col: str, flow: str) -> pd.DataFrame:
@@ -448,6 +509,9 @@ def build_gold(exports_dir: Path, imports_dir: Path, dict_path: Path, trademap_p
     treemap_imp = KPIBuilder.treemap_by_year(imp_cn, "CIF", flow="Importaciones")
     trademap_share_ecu = KPIBuilder.trademap_share_by_country(trademap, country="Ecuador")
     trademap_ranking = KPIBuilder.trademap_competitor_ranking(trademap, topn=15)
+    top_chapter_exp = KPIBuilder.top_products_by_chapter(exp_world, value_col="FOB", topn=10, group_level="Producto_Nombre")
+    top_chapter_imp = KPIBuilder.top_products_by_chapter(imp_world, value_col="CIF", topn=10, group_level="Producto_Nombre")
+    china_structural_break = KPIBuilder.import_share_china_structural(imp_world)
 
     exp_world.to_parquet(out_dir / "exp_world.parquet", index=False)
     imp_world.to_parquet(out_dir / "imp_world.parquet", index=False)
@@ -471,6 +535,9 @@ def build_gold(exports_dir: Path, imports_dir: Path, dict_path: Path, trademap_p
     treemap_imp.to_parquet(out_dir / "treemap_imp.parquet", index=False)
     trademap_share_ecu.to_parquet(out_dir / "trademap_share_ecu.parquet", index=False)
     trademap_ranking.to_parquet(out_dir / "trademap_ranking.parquet", index=False)
+    top_chapter_exp.to_parquet(out_dir / "top_chapter_exp.parquet", index=False)
+    top_chapter_imp.to_parquet(out_dir / "top_chapter_imp.parquet", index=False)
+    china_structural_break.to_parquet(out_dir / "china_structural_break.parquet", index=False)
 
     catalog = pd.DataFrame(
         [{"HS6": k, "Producto_Nombre": v} for k, v in hs_dict.hs6_to_name.items()]
@@ -503,6 +570,9 @@ def build_gold(exports_dir: Path, imports_dir: Path, dict_path: Path, trademap_p
             "treemap_imp.parquet",
             "trademap_share_ecu.parquet",
             "trademap_ranking.parquet",
+            "top_chapter_exp.parquet",
+            "top_chapter_imp.parquet",
+            "china_structural_break.parquet",
             "catalog.parquet",
         ],
     }

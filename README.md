@@ -81,3 +81,11 @@ Si un HS6 no existe en el diccionario (incluyendo `None`, vacío, `0`/`000000`),
 4. Etiqueta genérica (`Capítulo XX (sin detalle HS6)` / `Producto sin clasificar`)
 
 Esto evita `None` en nombres de producto.
+
+
+## Nuevas capacidades estratégicas (v2)
+
+- Consolidación principal por nombre (`Producto_Nombre`) en KPIs clave (share/HHI/vulnerabilidad/top/volatilidad) con soporte de `group_level` en ETL.
+- Nueva página Streamlit **📈 Dinámica Temporal** para BCE con filtros de capítulo, país, flujo y métrica, serie mensual+MA3, serie anual y YoY.
+- TradeMap reforzado con búsqueda de capítulos por código y nombre (etiqueta `XX - Nombre`) e histórica de market share por país.
+- Nuevos parquet: `top_chapter_exp.parquet`, `top_chapter_imp.parquet`, `china_structural_break.parquet`.

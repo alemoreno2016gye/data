@@ -51,5 +51,8 @@ class GoldRepository:
             "treemap_imp",
             "trademap_share_ecu",
             "trademap_ranking",
+            "top_chapter_exp",
+            "top_chapter_imp",
+            "china_structural_break",
         ]
         return {n: pd.read_parquet(GoldPaths(Path(gold_dir)).path(n)) for n in names}

@@ -41,24 +41,26 @@ def is_china_col(df: pd.DataFrame) -> pd.Series:
     return pd.Series(False, index=df.index)
 
 
-def dependency_table(df_world: pd.DataFrame, value_col: str, year_a: int, year_b: int) -> pd.DataFrame:
+def dependency_table(df_world: pd.DataFrame, value_col: str, year_a: int, year_b: int, group_level: str = "Producto_Nombre") -> pd.DataFrame:
     d = df_world[df_world["Anio"].isin([year_a, year_b])].copy()
     if d.empty:
         return pd.DataFrame()
 
-    world = d.groupby(["Anio", "Producto"], observed=True)[value_col].sum().rename("World")
-    china = d[is_china_col(d)].groupby(["Anio", "Producto"], observed=True)[value_col].sum().rename("China")
+    key = group_level if group_level in d.columns else "Producto"
+    world = d.groupby(["Anio", key], observed=True)[value_col].sum().rename("World")
+    china = d[is_china_col(d)].groupby(["Anio", key], observed=True)[value_col].sum().rename("China")
     out = pd.concat([world, china], axis=1).fillna(0).reset_index()
     out["Share"] = np.where(out["World"] > 0, out["China"] / out["World"], np.nan)
 
-    a = out[out["Anio"] == year_a][["Producto", "Share", "China", "World"]].rename(
+    a = out[out["Anio"] == year_a][[key, "Share", "China", "World"]].rename(
         columns={"Share": f"Share_{year_a}", "China": f"China_{year_a}", "World": f"World_{year_a}"}
     )
-    b = out[out["Anio"] == year_b][["Producto", "Share", "China", "World"]].rename(
+    b = out[out["Anio"] == year_b][[key, "Share", "China", "World"]].rename(
         columns={"Share": f"Share_{year_b}", "China": f"China_{year_b}", "World": f"World_{year_b}"}
     )
-    comp = a.merge(b, on="Producto", how="outer")
-    num_cols = [c for c in comp.columns if c != "Producto"]
+    comp = a.merge(b, on=key, how="outer")
+    comp = comp.rename(columns={key: "Producto_Agrupado"})
+    num_cols = [c for c in comp.columns if c != "Producto_Agrupado"]
     comp[num_cols] = comp[num_cols].fillna(0)
     comp["Delta_Share"] = comp[f"Share_{year_b}"] - comp[f"Share_{year_a}"]
     return comp
@@ -69,15 +71,24 @@ def chart_dependency_unique_names(dep: pd.DataFrame, catalog: pd.DataFrame, year
         return dep
 
     cat = catalog[["Codigo", "Producto"]].rename(columns={"Producto": "Producto_Label"})
-    out = dep.merge(cat, left_on="Producto", right_on="Codigo", how="left")
-    out["Producto_Label"] = out["Producto_Label"].astype("string").fillna("Producto sin nombre")
+    key = "Producto_Agrupado" if "Producto_Agrupado" in dep.columns else "Producto"
+    out = dep.merge(cat, left_on=key, right_on="Codigo", how="left")
+
+    # Blindaje contra colisiones/sufijos de pandas en merge
+    label_col = "Producto_Label"
+    if label_col not in out.columns:
+        for candidate in ["Producto_Label_y", "Producto_y", "Producto", "Producto_x"]:
+            if candidate in out.columns:
+                label_col = candidate
+                break
+    out[label_col] = out[label_col].astype("string").fillna("Producto sin nombre")
 
     yb_share = f"Share_{year_b}"
     yb_china = f"China_{year_b}"
     yb_world = f"World_{year_b}"
-    grp = out.groupby("Producto_Label", observed=True)[[yb_china, yb_world]].sum().reset_index()
+    grp = out.groupby(label_col, observed=True)[[yb_china, yb_world]].sum().reset_index()
     grp[yb_share] = np.where(grp[yb_world] > 0, grp[yb_china] / grp[yb_world], np.nan)
-    grp = grp.rename(columns={"Producto_Label": "Producto"})
+    grp = grp.rename(columns={label_col: "Producto"})
     return grp.sort_values(yb_share, ascending=False).head(topn)
 
 
@@ -150,8 +161,13 @@ def page_dependencia(core: dict[str, pd.DataFrame]) -> None:
     year_a = y1.selectbox("Año inicial", years, index=max(0, len(years) - 2))
     year_b = y2.selectbox("Año final", years, index=len(years) - 1)
 
-    exp_dep = dependency_table(exp_world, "FOB", year_a, year_b)
-    imp_dep = dependency_table(imp_world, "CIF", year_a, year_b)
+    mode = st.selectbox("Agrupar por", ["Nombre consolidado", "Código HS6"], index=0)
+    group_col = "Producto_Nombre" if mode == "Nombre consolidado" else "Producto"
+    if mode == "Nombre consolidado":
+        st.caption("Consolidación activa: códigos HS6 distintos con el mismo nombre se agregan en un solo producto.")
+
+    exp_dep = dependency_table(exp_world, "FOB", year_a, year_b, group_level=group_col)
+    imp_dep = dependency_table(imp_world, "CIF", year_a, year_b, group_level=group_col)
 
     exp_over = exp_dep[(exp_dep[f"Share_{year_a}"] > 0.5) | (exp_dep[f"Share_{year_b}"] > 0.5)]
     imp_over = imp_dep[(imp_dep[f"Share_{year_a}"] > 0.5) | (imp_dep[f"Share_{year_b}"] > 0.5)]
@@ -189,12 +205,38 @@ def page_dependencia(core: dict[str, pd.DataFrame]) -> None:
 
     st.divider()
     st.markdown("#### Comparativa por búsqueda de producto (nombre o código)")
-    options = [f"{r.Codigo} | {r.Producto}" for r in catalog.itertuples(index=False)]
-    selected = st.selectbox("Producto", options)
-    code = selected.split(" | ")[0]
 
-    ex = exp_dep[exp_dep["Producto"].astype(str) == code]
-    im = imp_dep[imp_dep["Producto"].astype(str) == code]
+    lookup_col = "Producto_Agrupado"
+    query = st.text_input("Buscar", value="", placeholder="Escribe código HS6 o nombre de producto...")
+
+    if mode == "Nombre consolidado":
+        base_search = catalog[["Producto"]].dropna().drop_duplicates().sort_values("Producto")
+        if query.strip():
+            q = query.strip().lower()
+            base_search = base_search[base_search["Producto"].astype(str).str.lower().str.contains(q, regex=False)]
+        opts = base_search["Producto"].tolist()
+        if not opts:
+            st.info("No hay coincidencias para la búsqueda.")
+            return
+        selected_name = st.selectbox("Producto consolidado", opts)
+        ex = exp_dep[exp_dep[lookup_col].astype(str) == str(selected_name)]
+        im = imp_dep[imp_dep[lookup_col].astype(str) == str(selected_name)]
+    else:
+        base_search = catalog[["Codigo", "Producto"]].dropna(subset=["Codigo"]).copy()
+        if query.strip():
+            q = query.strip().lower()
+            base_search = base_search[
+                base_search["Codigo"].astype(str).str.contains(q, regex=False)
+                | base_search["Producto"].astype(str).str.lower().str.contains(q, regex=False)
+            ]
+        opts = [f"{r.Codigo} | {r.Producto}" for r in base_search.sort_values(["Producto", "Codigo"]).itertuples(index=False)]
+        if not opts:
+            st.info("No hay coincidencias para la búsqueda.")
+            return
+        selected = st.selectbox("Producto (HS6)", opts)
+        code = selected.split(" | ")[0]
+        ex = exp_dep[exp_dep[lookup_col].astype(str) == code]
+        im = imp_dep[imp_dep[lookup_col].astype(str) == code]
 
     c1, c2 = st.columns(2)
     if not ex.empty:
@@ -270,6 +312,39 @@ def page_productos(core: dict[str, pd.DataFrame]) -> None:
         st.plotly_chart(apply_brand_style(fig), use_container_width=True)
 
 
+
+def page_dinamica_temporal(core: dict[str, pd.DataFrame]) -> None:
+    st.subheader("📈 Dinámica Temporal (BCE)")
+    flow = st.selectbox("Flujo", ["Exportaciones", "Importaciones"])
+    metric = st.selectbox("Métrica", ["FOB", "CIF", "TM"])
+    base = core["exp_world"].copy() if flow == "Exportaciones" else core["imp_world"].copy()
+    if metric not in base.columns:
+        st.warning(f"La métrica {metric} no existe para {flow}.")
+        return
+
+    caps = sorted(base["Capitulo_Nombre"].dropna().astype(str).unique())
+    countries = sorted(base["Pais"].dropna().astype(str).unique())
+    c1, c2 = st.columns(2)
+    cap = c1.selectbox("Capítulo", caps)
+    pais = c2.selectbox("País", countries)
+
+    d = base[(base["Capitulo_Nombre"].astype(str) == cap) & (base["Pais"].astype(str) == pais)].copy()
+    if d.empty:
+        st.info("No hay datos para esa combinación.")
+        return
+
+    monthly = d.groupby("Fecha", observed=True)[metric].sum().reset_index().sort_values("Fecha")
+    monthly["MA_3"] = monthly[metric].rolling(3, min_periods=1).mean()
+    figm = px.line(monthly, x="Fecha", y=[metric, "MA_3"], color_discrete_sequence=BRAND, title="Serie mensual + tendencia (MA3)")
+    st.plotly_chart(apply_brand_style(figm), use_container_width=True)
+
+    annual = d.groupby("Anio", observed=True)[metric].sum().reset_index().sort_values("Anio")
+    annual["YoY"] = annual[metric].pct_change()
+    c3, c4 = st.columns(2)
+    c3.plotly_chart(apply_brand_style(px.line(annual, x="Anio", y=metric, color_discrete_sequence=[BRAND[0]], title="Serie anual")), use_container_width=True)
+    c4.plotly_chart(apply_brand_style(px.bar(annual.dropna(subset=["YoY"]), x="Anio", y="YoY", color_discrete_sequence=[BRAND[2]], title="Variación YoY")), use_container_width=True)
+
+
 def page_estacionalidad(core: dict[str, pd.DataFrame]) -> None:
     st.subheader("Página 4 — Estacionalidad")
     flow = st.radio("Flujo", ["Exportaciones", "Importaciones"], horizontal=True)
@@ -336,6 +411,18 @@ def page_trademap(core: dict[str, pd.DataFrame]) -> None:
         rows.append(out)
     res = pd.concat(rows, ignore_index=True) if rows else pd.DataFrame(columns=["Capitulo_Label", "World", "Country", "Share", "Pais"])
 
+
+    st.markdown("### Histórica por capítulo y país")
+    if cap_sel_codes and countries_sel:
+        hist = tm[tm["Capitulo"].astype(str).str.zfill(2).isin(cap_sel_codes)].copy()
+        hist = hist[hist["Pais"].isin(countries_sel)]
+        world_hist = tm[tm["Capitulo"].astype(str).str.zfill(2).isin(cap_sel_codes)].groupby(["Year", "Capitulo"], observed=True)["Value"].sum().reset_index().rename(columns={"Value":"World"})
+        ctry_hist = hist.groupby(["Year", "Capitulo", "Pais"], observed=True)["Value"].sum().reset_index()
+        h = ctry_hist.merge(world_hist, on=["Year", "Capitulo"], how="left")
+        h["Share"] = np.where(h["World"] > 0, h["Value"] / h["World"], np.nan)
+        fig_hist = px.line(h, x="Year", y="Share", color="Pais", color_discrete_sequence=BRAND, title="Evolución histórica del market share en importaciones chinas")
+        st.plotly_chart(apply_brand_style(fig_hist), use_container_width=True)
+
     fig = px.bar(
         res,
         x="Capitulo_Label",
@@ -363,6 +450,7 @@ def main() -> None:
         "📌 Ejecutivo": page_ejecutivo,
         "🧠 Dependencia China": page_dependencia,
         "📦 Productos": page_productos,
+        "📈 Dinámica Temporal": page_dinamica_temporal,
         "🧭 Estacionalidad": page_estacionalidad,
         "🌍 TradeMap": page_trademap,
     }
