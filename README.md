@@ -137,3 +137,20 @@ python etl_modular_runner.py --gold-dir data/gold --out-dir data/gold
 ```bash
 streamlit run streamlit_modular_app.py
 ```
+
+
+### Runner híbrido (nuevo)
+
+Puedes ejecutar el mismo comando completo del ETL desde `etl_modular_runner.py`:
+
+```bash
+python etl_modular_runner.py \
+  --exports-dir "<ruta_exportaciones_xlsx>" \
+  --imports-dir "<ruta_importaciones_xlsx>" \
+  --dict-path "<ruta_diccionario_hs.xlsx>" \
+  --trademap-path "<ruta_panel_trademap.xlsx>" \
+  --out-dir "data/gold" \
+  --force
+```
+
+Si no pasas esas rutas, el runner usa `exp_world.parquet` e `imp_world.parquet` ya existentes (`--gold-dir`).

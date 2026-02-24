@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -115,8 +115,9 @@ class KPIEngine:
     def exposure_index(self, df: pd.DataFrame, value_col: str, group_level: str | None = None) -> pd.DataFrame:
         share = self.share_china(df, value_col, group_level)
         key = "Producto_Agrupado"
-        china = df[df["Es_China"]].groupby(["Anio", self._key(df, group_level or self.default_group_level)], observed=True)[value_col].sum().reset_index()
-        china = china.rename(columns={self._key(df, group_level or self.default_group_level): key, value_col: "china_value"}).sort_values([key, "Anio"])
+        src_key = self._key(df, group_level or self.default_group_level)
+        china = df[df["Es_China"]].groupby(["Anio", src_key], observed=True)[value_col].sum().reset_index()
+        china = china.rename(columns={src_key: key, value_col: "china_value"}).sort_values([key, "Anio"])
         china["yoy"] = china.groupby(key, observed=True)["china_value"].pct_change()
         vol = china.groupby(key, observed=True)["yoy"].std().reset_index(name="vol_yoy")
         out = share.groupby(key, observed=True)["share_china"].mean().reset_index().merge(vol, on=key, how="left")
@@ -128,10 +129,10 @@ class KPIEngine:
 class ObservatorioPipeline:
     """Pipeline modular raw->cleaned->enriched->kpis preserving parquet compatibility."""
 
-    loader: DataLoader = DataLoader()
-    transformer: Transformer = Transformer()
-    engineer: FeatureEngineer = FeatureEngineer()
-    kpis: KPIEngine = KPIEngine()
+    loader: DataLoader = field(default_factory=DataLoader)
+    transformer: Transformer = field(default_factory=Transformer)
+    engineer: FeatureEngineer = field(default_factory=FeatureEngineer)
+    kpis: KPIEngine = field(default_factory=KPIEngine)
 
     def validate_dictionary_match(self, df: pd.DataFrame) -> dict[str, Any]:
         total = len(df)
@@ -150,10 +151,11 @@ class ObservatorioPipeline:
         imp = self.engineer.add_logistics_metrics(imp)
         imp = self.engineer.add_price_elasticity_proxy(imp, value_col="CIF" if "CIF" in imp.columns else "FOB")
 
+        val_col = "CIF" if "CIF" in imp.columns else "FOB"
         out = {
-            "share_import": self.kpis.share_china(imp, value_col="CIF" if "CIF" in imp.columns else "FOB"),
-            "hhi_import": self.kpis.hhi(imp, value_col="CIF" if "CIF" in imp.columns else "FOB"),
-            "exposure_import": self.kpis.exposure_index(imp, value_col="CIF" if "CIF" in imp.columns else "FOB"),
+            "share_import": self.kpis.share_china(imp, value_col=val_col),
+            "hhi_import": self.kpis.hhi(imp, value_col=val_col),
+            "exposure_import": self.kpis.exposure_index(imp, value_col=val_col),
             "validated_import": pd.DataFrame([self.validate_dictionary_match(imp)]),
             "validated_export": pd.DataFrame([self.validate_dictionary_match(exp)]),
         }
