@@ -154,3 +154,39 @@ python etl_modular_runner.py \
 ```
 
 Si no pasas esas rutas, el runner usa `exp_world.parquet` e `imp_world.parquet` ya existentes (`--gold-dir`).
+
+
+### Ejecución en PowerShell (Windows)
+
+En PowerShell **no uses `\`** para continuar líneas. Usa:
+
+- una sola línea, o
+- el acento grave `` ` `` al final de cada línea.
+
+Ejemplo correcto (multilínea PowerShell):
+
+```powershell
+python .\etl_modular_runner.py `
+  --exports-dir "C:\Users\alejo\Desktop\OBSERVATORIO-CHINA\EXPORTACION_1998-2025" `
+  --imports-dir "C:\Users\alejo\Desktop\OBSERVATORIO-CHINA\IMPORTACIONES_1998-2025" `
+  --dict-path "C:\Users\alejo\Desktop\OBSERVATORIO-CHINA\diccionario_hs_caps.xlsx" `
+  --trademap-path "C:\Users\alejo\Desktop\OBSERVATORIO-CHINA\panel_trademap.xlsx" `
+  --out-dir ".\data\gold" `
+  --force
+```
+
+Si ves error de `dataclass` en Python 3.13, confirma que tienes la versión actualizada de `observatorio/pipeline.py` (usa `field(default_factory=...)`).
+
+
+### Healthcheck estático
+
+```bash
+python -m compileall .
+python healthcheck_static.py --gold-dir data/gold
+```
+
+Opcional (si dependencias instaladas):
+
+```bash
+pytest -q
+```

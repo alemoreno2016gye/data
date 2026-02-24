@@ -6,7 +6,6 @@ from pathlib import Path
 import pandas as pd
 
 from etl_build import build_gold
-from observatorio.pipeline import ObservatorioPipeline
 
 
 def parse_args() -> argparse.Namespace:
@@ -48,6 +47,8 @@ def main() -> None:
             force=args.force,
         )
         return
+
+    from observatorio.pipeline import ObservatorioPipeline
 
     pipe = ObservatorioPipeline()
     exp = pd.read_parquet(args.gold_dir / "exp_world.parquet")

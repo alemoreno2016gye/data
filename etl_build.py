@@ -459,6 +459,13 @@ def read_bce_folder(folder: Path, kind: str) -> pd.DataFrame:
     return pd.concat(frames, ignore_index=True)
 
 
+
+
+def _require_columns(df: pd.DataFrame, required: list[str], dataset_name: str) -> None:
+    missing = [c for c in required if c not in df.columns]
+    if missing:
+        raise ValueError(f"{dataset_name} missing required columns: {missing}")
+
 def build_gold(exports_dir: Path, imports_dir: Path, dict_path: Path, trademap_path: Path, out_dir: Path, force: bool) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     manifest_path = out_dir / "manifest.json"
@@ -484,6 +491,11 @@ def build_gold(exports_dir: Path, imports_dir: Path, dict_path: Path, trademap_p
     trademap["Value"] = pd.to_numeric(trademap["value"], errors="coerce")
     trademap["Pais"] = trademap["pais"].astype(str)
     trademap = trademap.dropna(subset=["Capitulo", "Year"])
+
+    # healthcheck de esquema mínimo para no romper Streamlit
+    _require_columns(exp_world, ["Fecha", "Anio", "Mes", "Capitulo", "Producto", "Es_China"], "exp_world")
+    _require_columns(imp_world, ["Fecha", "Anio", "Mes", "Capitulo", "Producto", "Es_China"], "imp_world")
+    _require_columns(trademap, ["Capitulo", "Year", "Value", "Pais"], "trademap")
 
     # Bilateral bases
     exp_cn = exp_world[exp_world["Es_China"]].copy() if not exp_world.empty else pd.DataFrame()
