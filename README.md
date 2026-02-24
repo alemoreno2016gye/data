@@ -89,3 +89,51 @@ Esto evita `None` en nombres de producto.
 - Nueva página Streamlit **📈 Dinámica Temporal** para BCE con filtros de capítulo, país, flujo y métrica, serie mensual+MA3, serie anual y YoY.
 - TradeMap reforzado con búsqueda de capítulos por código y nombre (etiqueta `XX - Nombre`) e histórica de market share por país.
 - Nuevos parquet: `top_chapter_exp.parquet`, `top_chapter_imp.parquet`, `china_structural_break.parquet`.
+
+## Arquitectura modular propuesta (pipeline + app)
+
+### Estructura de carpetas
+
+```text
+observatorio/
+  __init__.py
+  logging_utils.py
+  pipeline.py
+components/
+  charts.py
+  tables.py
+pages/
+  __init__.py
+  overview.py
+  chapters.py
+  products.py
+  risk.py
+  logistics.py
+utils/
+  scoring.py
+tests/
+  test_scoring.py
+etl_modular_runner.py
+streamlit_modular_app.py
+```
+
+### Pipeline (capas)
+
+- **raw**: lectura de fuentes/parquet (`DataLoader`)
+- **cleaned**: normalización HS + optimización tipos (`Transformer`)
+- **enriched**: features adicionales (logística, elasticidad proxy) (`FeatureEngineer`)
+- **kpis**: share China, HHI, exposición estratégica (`KPIEngine`)
+
+Clase orquestadora: `ObservatorioPipeline`.
+
+### Ejecución rápida del pipeline modular (sobre gold existente)
+
+```bash
+python etl_modular_runner.py --gold-dir data/gold --out-dir data/gold
+```
+
+### Ejecución de frontend modular
+
+```bash
+streamlit run streamlit_modular_app.py
+```
