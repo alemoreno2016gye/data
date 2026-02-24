@@ -1,0 +1,7 @@
+# Dependencias para crear un venv nuevo y ejecutar ETL + app Streamlit
+numpy>=1.26
+pandas>=2.1
+streamlit>=1.32
+plotly>=5.18
+openpyxl>=3.1
+pyarrow>=14.0
